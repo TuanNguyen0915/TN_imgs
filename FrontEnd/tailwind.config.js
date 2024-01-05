@@ -39,7 +39,7 @@ export default {
       backgroundColor: {
         'blackCover': 'rgba(0,0,0,0.7)'
       }
-    },
+     },
   },
   plugins: [],
 };
