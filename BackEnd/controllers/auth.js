@@ -29,6 +29,7 @@ const register = async (req, res, next) => {
       secure: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 2) // 2days
     })
+
     return res.status(201)
       .json({
         success: true, message: 'Create account successfully', user: rest, token
@@ -63,6 +64,7 @@ const OAth = async (req, res, next) => {
       secure: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 2) // 2days
     })
+
     return res.status(201)
       .json({
         success: true, message: 'Login successfully', user: rest, token
@@ -96,6 +98,7 @@ const login = async (req, res, next) => {
       secure: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 2) //2days
     })
+
     return res.status(200)
       .json({ success: true, message: 'Login successfully', user: rest, token })
   } catch (error) {
@@ -107,7 +110,14 @@ const login = async (req, res, next) => {
 // ---------------------- LOGOUT -------------------------
 const logout = async (req, res, next) => {
   try {
-    res.cookie('token', '')
+    res.cookie('token', '', {
+      path: '/',
+      sameSite: 'none',
+      expires: new Date(0),
+      httpOnly: true,
+      secure: true
+    })
+
     return res.status(200).json({ success: true, message: 'Logout successfully' })
   } catch (error) {
     res.status(500)

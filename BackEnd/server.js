@@ -11,11 +11,14 @@ import { router as authRouter } from './routes/auth.js'
 
 const app = express()
 const PORT = process.env.PORT
-
+const corsOption = {
+  origin: true,
+  credentials: true
+}
 // basic middleware
 app.use(express.json())
-app.use(cors())
 app.use(cookieParser())
+app.use(cors(corsOption))
 
 app.get('/', (req,res) => {
   res.send('BackEnd')
