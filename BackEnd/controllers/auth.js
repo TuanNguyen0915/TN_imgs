@@ -1,6 +1,6 @@
 import User from '../models/user.js'
 import jwt from 'jsonwebtoken'
-
+import bcrypt from 'bcryptjs'
 
 // -------------------- CREATE TOKEN --------------------
 const generateToken = (id) => {
@@ -13,7 +13,7 @@ const register = async (req, res, next) => {
     let user = await User.findOne({ email: req.body.email })
     if (user) {
       res.status(404)
-      throw new Error('This email has already register')
+      return next('This email has already register')
     }
     user = await User.create({
       name: req.body.name,
@@ -30,12 +30,13 @@ const register = async (req, res, next) => {
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 2) // 2days
     })
     return res.status(201)
-      .json({ success: true, message: 'Create account successfully', user: rest, token 
-    })
+      .json({
+        success: true, message: 'Create account successfully', user: rest, token
+      })
 
   } catch (error) {
     res.status(500)
-    next(error)
+    return next(error)
   }
 }
 
@@ -54,32 +55,64 @@ const OAth = async (req, res, next) => {
       })
     }
     const token = generateToken(user._id)
-      const { password, ...rest } = user._doc
-      res.cookie('token', token, {
-        path: '/',
-        httpOnly: true,
-        sameSite: 'none',
-        secure,
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 2) // 2days
+    const { password, ...rest } = user._doc
+    res.cookie('token', token, {
+      path: '/',
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 2) // 2days
+    })
+    return res.status(201)
+      .json({
+        success: true, message: 'Login successfully', user: rest, token
       })
-      return res.status(201)
-        .json({
-          success: true, message: 'Login successfully', user: rest, token
-        })
   } catch (error) {
     res.status(500)
-    next(error)
+    return next(error)
   }
 }
 
 // ---------------------- LOGIN -------------------------
-const login = async (req,res,next) => {
+const login = async (req, res, next) => {
   try {
-    
+    let user = await User.findOne({ email: req.body.email })
+    if (!user) {
+      res.status(404)
+      return next('This account is not register yet.')
+    }
+    // check password
+    const isPasswordMatching = bcrypt.compareSync(req.body.password, user.password)
+    if (!isPasswordMatching) {
+      res.status(404)
+      return next('Password not matching')
+    }
+    const token = generateToken(user._id)
+    const { password, ...rest } = user._doc
+    res.cookie('token', token, {
+      path: '/',
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 2) //2days
+    })
+    return res.status(200)
+      .json({ success: true, message: 'Login successfully', user: rest, token })
   } catch (error) {
     res.status(500)
-    throw new Error(err)
+    return next(error.message)
   }
 }
 
-export { register, OAth, login }
+// ---------------------- LOGOUT -------------------------
+const logout = async (req, res, next) => {
+  try {
+    res.cookie('token', '')
+    return res.status(200).json({ success: true, message: 'Logout successfully' })
+  } catch (error) {
+    res.status(500)
+    return next(error.message)
+  }
+}
+
+export { register, OAth, login, logout }
