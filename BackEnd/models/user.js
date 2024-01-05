@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  avatar: { type: String },
+  avatar: { type: String,  default: 'https://i.ibb.co/4pDNDk1/avatar.png' },
   photos: [{type: Schema.Types.ObjectId, ref:'Photo'}]
 }, {
   timestamps: true

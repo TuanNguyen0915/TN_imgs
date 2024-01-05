@@ -3,12 +3,14 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import { errorHandler } from './middleware/errorHandler.js'
+// connect mongoDB
+import './configs/database.js'
+
+// import routers
+import { router as authRouter } from './routes/auth.js'
 
 const app = express()
 const PORT = process.env.PORT
-
-// connect mongoDB
-import './configs/database.js'
 
 // basic middleware
 app.use(express.json())
@@ -18,6 +20,9 @@ app.use(cookieParser())
 app.get('/', (req,res) => {
   res.send('BackEnd')
 })
+
+// routers
+app.use('/api/user/', authRouter)
 
 // error middleware
 app.use(errorHandler)

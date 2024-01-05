@@ -1,16 +1,19 @@
 import User from '../models/user.js'
 import jwt from 'jsonwebtoken'
 
+
+// -------------------- CREATE TOKEN --------------------
 const generateToken = (id) => {
-  return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '2d'})
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '2d' })
 }
 
-const register = async (req,res,next) => {
+// -------------------- REGISTER --------------------
+const register = async (req, res, next) => {
   try {
-    let user = await User.findOne({email: req.body.email})
+    let user = await User.findOne({ email: req.body.email })
     if (user) {
       res.status(404)
-      next('This email has already register')
+      throw new Error('This email has already register')
     }
     user = await User.create({
       name: req.body.name,
@@ -18,13 +21,65 @@ const register = async (req,res,next) => {
       password: req.body.password
     })
     const token = generateToken(user._id)
-    const {password, ...rest} = user._doc
-    return res.status(201).json({success: true, message: 'Create account successfully', token, user:rest})
+    const { password, ...rest } = user._doc
+    res.cookie('token', token, {
+      path: '/',
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 2) // 2days
+    })
+    return res.status(201)
+      .json({ success: true, message: 'Create account successfully', user: rest, token 
+    })
 
   } catch (error) {
-    res.status(404)
+    res.status(500)
     next(error)
   }
 }
 
-export {register}
+// -------------------- GOOGLE OAUTH --------------------
+const OAth = async (req, res, next) => {
+  try {
+    let user = await User.findOne({ email: req.body.email })
+    if (!user) {
+      // generatePassword for first time and create account
+      const tempPassword = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2)
+      user = await User.create({
+        email: req.body.email,
+        password: tempPassword,
+        name: req.body.name,
+        avatar: req.body.avatar
+      })
+    }
+    const token = generateToken(user._id)
+      const { password, ...rest } = user._doc
+      res.cookie('token', token, {
+        path: '/',
+        httpOnly: true,
+        sameSite: 'none',
+        secure,
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 2) // 2days
+      })
+      return res.status(201)
+        .json({
+          success: true, message: 'Login successfully', user: rest, token
+        })
+  } catch (error) {
+    res.status(500)
+    next(error)
+  }
+}
+
+// ---------------------- LOGIN -------------------------
+const login = async (req,res,next) => {
+  try {
+    
+  } catch (error) {
+    res.status(500)
+    throw new Error(err)
+  }
+}
+
+export { register, OAth, login }
