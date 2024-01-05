@@ -11,3 +11,5 @@ const errorHandler = (err,req,res,next) => {
     stack: err.stack
   })
 }
+
+export { errorHandler}

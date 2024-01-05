@@ -2,6 +2,7 @@ import 'dotenv/config'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import { errorHandler } from './middleware/errorHandler.js'
 
 const app = express()
 const PORT = process.env.PORT
@@ -18,6 +19,8 @@ app.get('/', (req,res) => {
   res.send('BackEnd')
 })
 
+// error middleware
+app.use(errorHandler)
 
 app.listen(PORT, ()=>{
   console.log(`Server is running on port ${PORT}!`)
