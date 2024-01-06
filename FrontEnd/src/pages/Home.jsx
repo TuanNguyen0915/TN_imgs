@@ -4,15 +4,15 @@ import { HiMenu } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import SideBar from "../components/SideBar";
 import { useSelector } from "react-redux";
-import UserProfile from "../components/UserProfile";
 import logo from "../assets/black-logo.png";
 import Images from "../components/Images";
+import UserProfile from "../components/UserProfile";
+import { Route, Routes } from "react-router-dom";
 
 const Home = () => {
   const scrollRef = useRef(null);
   const { currentUser } = useSelector((state) => state.user);
   const user = currentUser?.user;
-  console.log(user);
   const [toggleSidebar, setToggleSidebar] = useState(false);
 
   useEffect(() => {
@@ -61,7 +61,10 @@ const Home = () => {
         className="h-screen flex-1 overflow-y-scroll pb-2"
         ref={scrollRef}
       >
-        <Images user={user && user} />
+        <Routes>
+          <Route path="/user/:userId" element={<UserProfile />} />
+          <Route path="/*" element={<Images user={user && user} />} />
+        </Routes>
       </div>
     </div>
   );

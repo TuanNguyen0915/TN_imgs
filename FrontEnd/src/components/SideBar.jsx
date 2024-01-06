@@ -20,7 +20,7 @@ const SideBar = ({ user, closeToggle }) => {
   return (
     <div className="flex h-full min-w-[250px] flex-col justify-between gap-5 overflow-y-auto bg-white">
       <div>
-        <div className="flex items-center justify-center rounded-br-lg bg-gray-50 shadow-xl">
+        <div className="flex items-center justify-center">
           <Link
             to="/"
             className="my-6 flex w-[190px] items-center gap-2 px-5 pt-1"
@@ -47,7 +47,7 @@ const SideBar = ({ user, closeToggle }) => {
               Discover categories
             </h3>
 
-            {!showCategories ? <IoIosArrowDown /> : ""}
+            {!showCategories ? <IoIosArrowDown fontSize={14} className="translate-y-1"/> : ""}
           </div>
           {showCategories && (
             <div className="animate-slide-in">
