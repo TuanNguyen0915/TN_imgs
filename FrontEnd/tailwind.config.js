@@ -12,12 +12,22 @@ export default {
       keyframes: {
         "slide-in": {
           "0%": {
-            "webkit-transform": "translateX(-200px)",
-            transform: "translateX(-200px)",
+            "webkit-transform": "translateX(-300px)",
+            transform: "translateX(-300px)",
           },
           "100%": {
             "webkit-transform": "translateX(0px)",
             transform: "translateX(0px)",
+          },
+        },
+        "slide-out": {
+          "0%": {
+            "webkit-transform": "translateX(0)",
+            transform: "translateX(0)",
+          },
+          "100%": {
+            "webkit-transform": "translateX(-400px)",
+            transform: "translateX(-400px)",
           },
         },
         "slide-fwd": {
@@ -35,6 +45,7 @@ export default {
         "slide-in": "slide-in 0.5s ease-out",
         "slide-fwd":
           " slide-fwd 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
+        "slide-out": "slide-out 0.5s ease-out"
       },
       backgroundColor: {
         'blackCover': 'rgba(0,0,0,0.7)'
