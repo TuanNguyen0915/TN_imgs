@@ -1,8 +1,13 @@
 import { useState } from "react";
 import * as authService from "../services/auth";
 import { toast } from "react-toastify";
+import { logInFailure, logInStart, logInSuccess } from "../redux/user/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+
 
 const LoginForm = () => {
+  const dispatch = useDispatch()
+  const {loading}  = useSelector(state => state.user)
   const [clicked, setClicked] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -15,12 +20,19 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await authService.login(formData);
+    try {
+      dispatch(logInStart())
+      const data = await authService.login(formData);
     if (!data.success) {
-      toast.error(data.message);
+      dispatch(logInFailure(data.message))
+      toast.error(data);
     } else {
-      // localStorage.setItem('token', data.token)
+      dispatch(logInSuccess(data))
       toast.success(data.message);
+    }
+    } catch (error) {
+      dispatch(logInFailure(error))
+     toast.error(error.message) 
     }
   };
 
@@ -60,7 +72,7 @@ const LoginForm = () => {
               onChange={handleChange}
             />
             <button className="w-full rounded-md bg-slate-600 p-2 text-white hover:bg-slate-400">
-              Login
+              {loading?<p>Loading</p>:<p>Login</p>}
             </button>
           </form>
         </div>

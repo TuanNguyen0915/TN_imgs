@@ -3,6 +3,7 @@ import whiteLogo from "../assets/white-logo.png";
 import GoogleLogin from "../components/GoogleLogin";
 import LoginForm from "../components/LoginForm";
 
+
 const Login = () => {
   return (
     <div className="flex h-screen flex-col items-center justify-start">
@@ -15,9 +16,9 @@ const Login = () => {
           autoPlay
           className="h-full w-full object-cover"
         />
-        <div className="bg-blackCover absolute bottom-0 left-0 right-0 top-0 flex flex-col items-center justify-center gap-2">
-          <div className="w-[300px] h-[300px]">
-            <img src={whiteLogo} alt="logo" className="w-full"/>
+        <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-col items-center justify-center gap-2 bg-blackCover">
+          <div className="h-[300px] w-[300px]">
+            <img src={whiteLogo} alt="logo" className="w-full" />
           </div>
           <GoogleLogin />
           <LoginForm />
