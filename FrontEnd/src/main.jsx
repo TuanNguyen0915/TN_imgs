@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           theme="light"
           autoClose={3000}
           closeOnClick={true}
-          pauseOnHover={true}
+          pauseOnHover={false}
           position="top-right"
         />
         <App />
