@@ -1,9 +1,8 @@
-import {useState } from "react";
+import { useState } from "react";
 import * as authService from "../services/auth";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
-  
   const [clicked, setClicked] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -18,17 +17,17 @@ const LoginForm = () => {
     e.preventDefault();
     const data = await authService.login(formData);
     if (!data.success) {
-      toast.error(data.message)
+      toast.error(data.message);
     } else {
       // localStorage.setItem('token', data.token)
-      toast.success(data.message)
+      toast.success(data.message);
     }
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center">
+    <div className="flex w-[300px] flex-col items-center justify-center">
       <button
-        className="my-2 flex h-[50px] w-[260px] items-center justify-center gap-2 rounded-lg bg-slate-300 px-4 py-2 shadow-2xl"
+        className="flex h-[50px] w-full items-center justify-center gap-2 rounded-lg bg-white/20 px-4 py-2 text-white shadow-2xl backdrop-blur-md"
         onClick={() => setClicked(!clicked)}
       >
         Login by Email
@@ -36,10 +35,10 @@ const LoginForm = () => {
       {clicked && (
         <div>
           <form
-            className="mt-2 flex flex-col items-center justify-center gap-2 rounded-lg bg-slate-300 p-4"
+            className="mt-2 flex w-[300px] flex-col items-center justify-center gap-2 rounded-lg bg-white/20 p-4 backdrop-blur-lg"
             onSubmit={handleSubmit}
           >
-            <h1 className="text-xl font-bold">Login</h1>
+            <h1 className="text-xl font-bold text-white">Login</h1>
             <input
               type="text"
               name="email"
@@ -47,7 +46,7 @@ const LoginForm = () => {
               placeholder="Email"
               autoComplete="off"
               required
-              className="rounded-md p-2"
+              className="w-full rounded-md p-2 opacity-50 outline-none hover:opacity-80 focus:opacity-80"
               onChange={handleChange}
             />
             <input
@@ -57,10 +56,10 @@ const LoginForm = () => {
               placeholder="Password"
               autoComplete="off"
               required
-              className="rounded-md p-2"
+              className="w-full rounded-md p-2 opacity-50 outline-none hover:opacity-80 focus:opacity-80"
               onChange={handleChange}
             />
-            <button className="w-full rounded-md bg-slate-600 p-2 text-white hover:opacity-80 focus:opacity-80">
+            <button className="w-full rounded-md bg-slate-600 p-2 text-white hover:bg-slate-400">
               Login
             </button>
           </form>

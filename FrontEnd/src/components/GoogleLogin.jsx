@@ -24,7 +24,7 @@ const GoogleLogin = () => {
   return (
     <div>
       <button
-        className="flex h-[50px] w-[260px] items-center justify-between gap-2 rounded-lg bg-slate-300 px-4 py-2 shadow-2xl"
+        className="flex h-[50px] w-[300px] items-center justify-between gap-2 rounded-lg bg-white/20 backdrop-blur-md px-4 py-2 shadow-2xl"
         onClick={handleOAuth}
       >
         <img
@@ -32,7 +32,7 @@ const GoogleLogin = () => {
           alt="google icon"
           className="flex h-full items-center justify-center object-contain"
         />
-        <p className="w-full">Sign in with Google</p>
+        <p className="w-full text-white">Continue with Google</p>
       </button>
     </div>
   );

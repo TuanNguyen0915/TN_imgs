@@ -12,6 +12,9 @@ const Auth = async (formData) => {
       body: JSON.stringify(formData)
     })
     const json = await res.json()
+    if(json.token) {
+      tokenService.setToken(json.token)
+    }
     return json
   } catch (error) {
     throw new Error(error)
