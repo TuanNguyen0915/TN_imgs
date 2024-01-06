@@ -2,10 +2,17 @@ import googleIcon from "../assets/google-icon.png";
 import { app } from "../utils/firebase";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import * as AuthService from "../services/auth";
+import {toast} from 'react-toastify'
+import { logInFailure, logInStart, logInSuccess } from "../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const GoogleLogin = () => {
+  const dispatch = useDispatch()
+  const {loading} = useSelector(state => state.user)
+
   const handleOAuth = async () => {
     try {
+      dispatch(logInStart())
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
       const result = await signInWithPopup(auth, provider);
@@ -15,8 +22,16 @@ const GoogleLogin = () => {
         avatar: result.user.photoURL,
       };
       const data = await AuthService.Auth(formData);
-      console.log(data);
+      if(!data.success){
+        dispatch(logInFailure(data))
+        toast.error(data.message)
+      } else {
+        dispatch(logInSuccess(data))
+        toast.success(data.message)
+      }
     } catch (error) {
+      dispatch(logInFailure(error))
+      toast.error(error.message)
       throw new Error(error);
     }
   };
@@ -32,7 +47,7 @@ const GoogleLogin = () => {
           alt="google icon"
           className="flex h-full items-center justify-center object-contain"
         />
-        <p className="w-full text-white">Continue with Google</p>
+        <p className="w-full text-white">{loading?'Loading...':'Continue with Google'}</p>
       </button>
     </div>
   );
