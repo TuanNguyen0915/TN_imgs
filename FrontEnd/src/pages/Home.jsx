@@ -5,7 +5,8 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import SideBar from "../components/SideBar";
 import { useSelector } from "react-redux";
 import UserProfile from "../components/UserProfile";
-import logo from "../assets/white-logo.png";
+import logo from "../assets/black-logo.png";
+import Images from "../components/Images";
 
 const Home = () => {
   const scrollRef = useRef(null);
@@ -26,7 +27,7 @@ const Home = () => {
       </div>
       {/* MOBILE VIEW */}
       <div className="flex flex-row md:hidden">
-        <div className="flex w-full flex-row items-center justify-between p-2 shadow-md bg-slate-400">
+        <div className="flex w-full flex-row items-center justify-between p-2 shadow-lg">
           <HiMenu
             fontSize={40}
             className="cursor-pointer"
@@ -39,7 +40,7 @@ const Home = () => {
             <img
               src={user?.avatar}
               alt="user-pic"
-              className="h-9 w-9 rounded-full "
+              className="h-9 w-9 rounded-full mr-4"
             />
           </Link>
         </div>
@@ -59,7 +60,9 @@ const Home = () => {
       <div
         className="h-screen flex-1 overflow-y-scroll pb-2"
         ref={scrollRef}
-      ></div>
+      >
+        <Images user={user && user} />
+      </div>
     </div>
   );
 };

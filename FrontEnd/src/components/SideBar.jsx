@@ -70,7 +70,11 @@ const SideBar = ({ user, closeToggle }) => {
       </div>
 
       {user && (
-        <Link className="mx-3 my-5 mb-3 flex items-center gap-2 rounded-lg p-2 shadow-lg">
+        <Link
+        to={`user/${user._id}`}
+        className="mx-3 my-5 mb-3 flex items-center gap-2 rounded-lg p-2 shadow-lg"
+        onClick={handleCloseSideBar}
+        >
           <img
             src={user.avatar}
             alt="user's avatar"
