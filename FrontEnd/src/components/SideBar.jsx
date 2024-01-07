@@ -3,7 +3,7 @@ import { RiHomeFill } from "react-icons/ri";
 import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
 
 import logo from "../assets/black-logo.png";
-import { categoriesLink } from "../data/data";
+import { categoriesLink } from "../utils/data/data";
 import { useState } from "react";
 
 // SIDEBAR
@@ -30,12 +30,13 @@ const SideBar = ({ user, closeToggle }) => {
           </Link>
         </div>
         {/* NAV LINK */}
-        <div className="flex flex-col gap-5 mt-10">
+        <div className="mt-10 flex flex-col gap-5">
           <NavLink
             to="/"
             className={(navClass) =>
               navClass.isActive ? isActiveStyle : isNotActiveStyle
             }
+            onClick={handleCloseSideBar}
           >
             <RiHomeFill /> Home
           </NavLink>
@@ -43,11 +44,15 @@ const SideBar = ({ user, closeToggle }) => {
             className="flex items-center gap-1"
             onClick={() => setShowCategories(!showCategories)}
           >
-            <h3 className="mt-2 px-5 text-base 2xl:text-xl hover:text-emerald-600">
+            <h3 className="mt-2 px-5 text-base hover:text-emerald-600 2xl:text-xl">
               Discover categories
             </h3>
 
-            {!showCategories ? <IoIosArrowDown fontSize={14} className="translate-y-1"/> : ""}
+            {!showCategories ? (
+              <IoIosArrowDown fontSize={14} className="translate-y-1" />
+            ) : (
+              ""
+            )}
           </div>
           {showCategories && (
             <div className="animate-slide-in">
@@ -71,9 +76,9 @@ const SideBar = ({ user, closeToggle }) => {
 
       {user && (
         <Link
-        to={`user/${user._id}`}
-        className="mx-3 my-5 mb-3 flex items-center gap-2 rounded-lg p-2 shadow-lg"
-        onClick={handleCloseSideBar}
+          to={`user/${user._id}`}
+          className="mx-3 my-5 mb-3 flex items-center gap-2 rounded-lg p-2 shadow-lg"
+          onClick={handleCloseSideBar}
         >
           <img
             src={user.avatar}

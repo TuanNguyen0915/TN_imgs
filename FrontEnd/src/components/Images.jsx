@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { NavBar, ImageDetail, Feed, UploadImage, Search } from "../components";
 import { useSelector } from "react-redux";
@@ -7,6 +7,7 @@ const Images = () => {
   const { currentUser } = useSelector((state) => state.user);
   const user = currentUser?.user;
   const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <div className="px-2 md:px-5">
       <div className="bg-gray-50">
@@ -20,7 +21,7 @@ const Images = () => {
             path="/images/:imageId"
             element={<ImageDetail user={user && user} />}
           />
-          <Route path="/upload-image" element={<UploadImage />} />
+          <Route path="/:userId/upload-image" element={<UploadImage />} />
           <Route
             path="/search"
             element={

@@ -8,6 +8,7 @@ import './configs/database.js'
 
 // import routers
 import { router as authRouter } from './routes/auth.js'
+import { router as imgRouter } from './routes/photo.js'
 
 const app = express()
 const PORT = process.env.PORT
@@ -26,6 +27,7 @@ app.get('/', (req,res) => {
 
 // routers
 app.use('/api/user/', authRouter)
+app.use('/api/image/', imgRouter)
 
 // error middleware
 app.use(errorHandler)

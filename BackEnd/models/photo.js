@@ -10,7 +10,7 @@ const photoSchema = new mongoose.Schema({
   decs: { type: String },
   url: { type: String, required: true },
   category: { type: String },
-  addBy: { type: Schema.ObjectId.ObjectId, ref: 'User' },
+  addBy: { type: Schema.Types.ObjectId, ref: 'User' },
   comments: [commentSchema]
 }, { timestamps: true })
 

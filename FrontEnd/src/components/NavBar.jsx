@@ -29,7 +29,7 @@ const NavBar = ({ searchTerm, setSearchTerm, user }) => {
           </Link>
         </div>
         <Link
-          to="/upload-image"
+          to={`/${user._id}/upload-image`}
           className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-800 text-white md:h-12 md:w-12"
         >
           <IoMdAdd fontSize={24} />
