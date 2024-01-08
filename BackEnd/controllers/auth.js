@@ -107,6 +107,22 @@ const login = async (req, res, next) => {
   }
 }
 
+// ---------------------- USER DETAILS -------------------------
+const userDetails = async (req, res, next) => {
+  try {
+    let user = await User.findById(req.params.userId).populate('photos')
+    if (!user) {
+      res.status(404)
+      return next('User not found')
+    }
+    const { password, ...rest } = user._doc
+    return res.status(200).json({ success: true, message: "User found", user: rest })
+  } catch (error) {
+    res.status(500)
+    return next(error.message)
+  }
+}
+
 // ---------------------- LOGOUT -------------------------
 const logout = async (req, res, next) => {
   try {
@@ -125,4 +141,4 @@ const logout = async (req, res, next) => {
   }
 }
 
-export { register, OAth, login, logout }
+export { register, OAth, login, logout, userDetails }
