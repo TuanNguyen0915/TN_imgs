@@ -11,6 +11,8 @@ const photoSchema = new mongoose.Schema({
   url: { type: String, required: true },
   category: { type: String },
   addBy: { type: Schema.Types.ObjectId, ref: 'User' },
+  saved: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+
   comments: [commentSchema]
 }, { timestamps: true })
 
