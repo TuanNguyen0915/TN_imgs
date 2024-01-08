@@ -3,9 +3,10 @@ import * as authService from "../services/auth";
 import { toast } from "react-toastify";
 import { logInFailure, logInStart, logInSuccess } from "../redux/user/userSlice";
 import { useSelector, useDispatch } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const {loading}  = useSelector(state => state.user)
   const [clicked, setClicked] = useState(false);
@@ -29,6 +30,7 @@ const LoginForm = () => {
     } else {
       dispatch(logInSuccess(data))
       toast.success(data.message);
+      navigate('/')
     }
     } catch (error) {
       dispatch(logInFailure(error))
