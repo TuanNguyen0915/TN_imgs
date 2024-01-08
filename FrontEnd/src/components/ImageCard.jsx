@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { MdDownloadForOffline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
+import { BsFillArrowUpRightCircleFill} from "react-icons/bs";
 import { useState } from "react";
 import { saveAs } from "file-saver";
 import { useSelector } from "react-redux";
@@ -11,7 +11,6 @@ const ImageCard = ({ image }) => {
   const [currentImage, setCurrentImage] = useState(image);
   const { currentUser } = useSelector((state) => state.user);
   const user = currentUser?.user;
-
   const [postHovered, setPostHovered] = useState(false);
   // download the image
   const downloadImage = async (e) => {
@@ -20,7 +19,6 @@ const ImageCard = ({ image }) => {
     const data = await imageService.imageSaved(user._id, currentImage._id);
     setCurrentImage(data);
   };
-
   return (
     <div className="flex flex-col items-center justify-center p-2">
       <div
@@ -74,9 +72,10 @@ const ImageCard = ({ image }) => {
         )}
       </div>
     {/* uploader's name */}
-    <p>
-      {currentImage.addBy}
-    </p>
+    <div className="w-full flex items-center gap-2 mt-2">
+        <img src={currentImage.addBy.avatar} alt="user's photo" className="w-6 h-6 rounded-full"/>
+        <p className="text-sm">{currentImage.addBy.name}</p>
+    </div>
     </div>
   );
 };
