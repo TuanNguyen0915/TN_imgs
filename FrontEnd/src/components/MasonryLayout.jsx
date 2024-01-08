@@ -1,5 +1,5 @@
-import Masonry from 'react-masonry-css'
-import ImageCard from './ImageCard'
+import Masonry from "react-masonry-css";
+import ImageCard from "./Images/ImageCard";
 
 const breakpointObj = {
   default: 4,
@@ -7,20 +7,17 @@ const breakpointObj = {
   2000: 5,
   1200: 3,
   1000: 2,
-  500: 1
-}
+  500: 1,
+};
 
-const MasonryLayout = ({images}) => {
+const MasonryLayout = ({ images }) => {
   return (
-      <Masonry
-      className='flex animate-slide-fwd'
-      breakpointCols={breakpointObj}
-      >
+    <Masonry className="flex animate-slide-fwd" breakpointCols={breakpointObj}>
       {images?.map((image) => (
-       <ImageCard key={image._id} image={image} className='w-max'/>
+        <ImageCard key={image._id} image={image} className="w-max" />
       ))}
     </Masonry>
-  )
-}
+  );
+};
 
-export default MasonryLayout
+export default MasonryLayout;

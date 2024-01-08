@@ -1,7 +1,7 @@
 import { useState } from "react";
-import * as authService from "../services/auth";
+import * as authService from "../../services/auth";
 import { toast } from "react-toastify";
-import { logInFailure, logInStart, logInSuccess } from "../redux/user/userSlice";
+import { logInFailure, logInStart, logInSuccess } from "../../redux/user/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 

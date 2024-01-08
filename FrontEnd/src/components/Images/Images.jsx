@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { NavBar, ImageDetail, Feed, UploadImage, Search } from "../components";
+import { NavBar, ImageDetail, Feed, UploadImage, Search } from "..";
 import { useSelector } from "react-redux";
 
 const Images = () => {
@@ -11,7 +11,11 @@ const Images = () => {
   return (
     <div className="px-2 md:px-5">
       <div className="bg-gray-50">
-        <NavBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} user={user}/>
+        <NavBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          user={user}
+        />
       </div>
       <div className="h-full ">
         <Routes>

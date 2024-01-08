@@ -5,7 +5,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import SideBar from "../components/SideBar";
 import { useSelector } from "react-redux";
 import logo from "../assets/black-logo.png";
-import Images from "../components/Images";
+import Images from "../components/Images/Images";
 import UserProfile from "../components/UserProfile";
 import { Route, Routes } from "react-router-dom";
 

@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { MdDownloadForOffline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-import { BsFillArrowUpRightCircleFill} from "react-icons/bs";
+import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
 import { useState } from "react";
 import { saveAs } from "file-saver";
 import { useSelector } from "react-redux";
-import * as imageService from "../services/image";
+import * as imageService from "../../services/image";
 
 const ImageCard = ({ image }) => {
   const [currentImage, setCurrentImage] = useState(image);
@@ -19,6 +19,7 @@ const ImageCard = ({ image }) => {
     const data = await imageService.imageSaved(user._id, currentImage._id);
     setCurrentImage(data);
   };
+  console.log(currentImage.addBy.avatar)
   return (
     <div className="flex flex-col items-center justify-center p-2">
       <div
@@ -40,7 +41,7 @@ const ImageCard = ({ image }) => {
               <MdDownloadForOffline
                 onClick={downloadImage}
                 size={32}
-                className="opacity-70 outline-none transition-all duration-150 ease-in hover:scale-125 hover:opacity-100 hover:ml-1"
+                className="opacity-70 outline-none transition-all duration-150 ease-in hover:ml-1 hover:scale-125 hover:opacity-100"
               />
               <div className="flex items-center justify-center rounded-lg bg-red-500 px-2 py-1 opacity-70 transition-all duration-150 ease-in hover:mr-2 hover:scale-125 hover:opacity-100">
                 <button type="button" className="text-[12px]">
@@ -71,11 +72,21 @@ const ImageCard = ({ image }) => {
           </div>
         )}
       </div>
-    {/* uploader's name */}
-    <div className="w-full flex items-center gap-2 mt-2">
-        <img src={currentImage.addBy.avatar} alt="user's photo" className="w-6 h-6 rounded-full"/>
-        <p className="text-sm">{currentImage.addBy.name}</p>
-    </div>
+      {/* uploader's name */}
+      <div className="mt-2 w-full">
+        <Link
+          to={`/user/${currentImage.addBy._id}`}
+          className="flex w-full items-center gap-2 hover:text-emerald-600"
+        >
+          <img
+            src={currentImage.addBy.avatar}
+            referrerPolicy="no-referrer"
+            alt="user's photo"
+            className="h-6 w-6 rounded-full"
+          />
+          <p className="text-sm">{currentImage.addBy.name}</p>
+        </Link>
+      </div>
     </div>
   );
 };

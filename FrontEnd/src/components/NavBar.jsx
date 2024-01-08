@@ -22,7 +22,8 @@ const NavBar = ({ searchTerm, setSearchTerm, user }) => {
         <div className="hidden w-12 md:flex">
           <Link to={`user/${user._id}`}>
             <img
-              src={user.avatar}
+              src={user?.avatar}
+              referrerPolicy="no-referrer"
               alt="user's avatar"
               className="w-full rounded-full object-cover"
             />

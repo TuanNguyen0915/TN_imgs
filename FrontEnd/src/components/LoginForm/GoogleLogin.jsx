@@ -1,9 +1,9 @@
-import googleIcon from "../assets/google-icon.png";
-import { app } from "../utils/firebase";
+import googleIcon from "../../assets/google-icon.png";
+import { app } from "../../utils/firebase";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import * as AuthService from "../services/auth";
+import * as AuthService from "../../services/auth";
 import {toast} from 'react-toastify'
-import { logInFailure, logInStart, logInSuccess } from "../redux/user/userSlice";
+import { logInFailure, logInStart, logInSuccess } from "../../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
