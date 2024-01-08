@@ -7,5 +7,5 @@ router.post('/register', authCtrl.register)
 router.post('/google-oauth', authCtrl.OAth)
 router.post('/login', authCtrl.login)
 router.get('/logout', authCtrl.logout)
-
+router.get('/:userId',authCtrl.userDetails )
 export {router}
