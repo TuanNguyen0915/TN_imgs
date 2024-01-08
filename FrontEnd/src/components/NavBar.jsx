@@ -23,8 +23,8 @@ const NavBar = ({ searchTerm, setSearchTerm, user }) => {
           <Link to={`user/${user._id}`}>
             <img
               src={user?.avatar}
-              referrerPolicy="no-referrer"
               alt="user's avatar"
+              referrerPolicy="no-referrer"
               className="w-full rounded-full object-cover"
             />
           </Link>

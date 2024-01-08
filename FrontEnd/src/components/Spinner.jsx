@@ -4,9 +4,9 @@ const Spinner = ({ message }) => {
     <div className="flex h-full w-full flex-col items-center justify-center">
       <ThreeCircles
         visible={true}
-        height={100}
-        width={100}
-        color="#4fa94d"
+        height={50}
+        width={50}
+        color="#16a34a"
         ariaLabel="three-circles-loading"
         className="m-5"
       />
