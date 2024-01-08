@@ -1,7 +1,7 @@
 import loginVideo from "../assets/login_video.mp4";
 import whiteLogo from "../assets/white-logo.png";
-import GoogleLogin from "../components/LoginForm/GoogleLogin";
-import LoginForm from "../components/LoginForm/LoginForm";
+import GoogleLogin from "../components/Form/GoogleLogin";
+import LoginForm from "../components/Form/LoginForm";
 
 
 const Login = () => {

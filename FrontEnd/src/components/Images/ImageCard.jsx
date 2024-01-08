@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MdDownloadForOffline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
@@ -63,7 +63,7 @@ const ImageCard = ({ image }) => {
                 </a>
               </div>
               {/* show delete button if user = uploader photo */}
-              {user._id === currentImage.addBy && (
+              {user?._id === currentImage.addBy && (
                 <div className="flex items-center justify-center rounded-full bg-white p-1 text-red-700 opacity-70 transition-all duration-150 ease-in hover:scale-[1.5] hover:opacity-100">
                   <MdDelete />
                 </div>

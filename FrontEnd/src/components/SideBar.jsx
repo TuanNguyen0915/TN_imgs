@@ -1,6 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import { RiHomeFill } from "react-icons/ri";
-import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 
 import logo from "../assets/black-logo.png";
 import { categoriesLink } from "../utils/data/data";
@@ -57,7 +57,7 @@ const SideBar = ({ user, closeToggle }) => {
           {showCategories && (
             <div className="animate-slide-in">
               {categoriesLink.map((category) => (
-                <div key={category.name} className="pl-10">
+                <div key={category.name} className="mb-1 pl-10">
                   <NavLink
                     to={`/category/${category.name}`}
                     className={(navClass) =>
