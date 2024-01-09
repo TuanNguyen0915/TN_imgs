@@ -1,8 +1,8 @@
-import { ThreeCircles, Circles } from "react-loader-spinner";
+import { Circles } from "react-loader-spinner";
 const Spinner = ({ message }) => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      <ThreeCircles
+      <Circles
         visible={true}
         height={50}
         width={50}
@@ -10,7 +10,8 @@ const Spinner = ({ message }) => {
         ariaLabel="three-circles-loading"
         className="m-5"
       />
-      <p className="mt-10 px-2 text-center text-lg">{message}</p>
+
+      {message && <p className="mt-10 px-2 text-center text-lg">{message}</p>}
     </div>
   );
 };

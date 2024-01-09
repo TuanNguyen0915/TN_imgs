@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import MasonryLayout from "./MasonryLayout";
-import Spinner from "./Spinner";
+import Spinner from "./Spinner/CirclesSpinner";
 import { useEffect, useState } from "react";
 import * as imageServices from "../services/image";
 

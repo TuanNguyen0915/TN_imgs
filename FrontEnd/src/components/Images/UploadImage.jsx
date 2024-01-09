@@ -11,7 +11,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 //components
-import Spinner from "../Spinner";
+import Spinner from "../Spinner/CirclesSpinner";
 import UploadImageForm from "../Form/UploadImageForm";
 
 const UploadImage = ({ user }) => {
@@ -49,7 +49,7 @@ const UploadImage = ({ user }) => {
         setUploadPercent(Math.round(progress));
       },
       (error) => {
-        throw new Error(error)
+        throw new Error(error);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
@@ -61,8 +61,8 @@ const UploadImage = ({ user }) => {
   return (
     <div>
       <div className="container flex w-full items-center justify-center">
-        <div className="flex w-full items-center justify-center rounded-lg bg-gray-400/20 p-3 md:w-4/5">
-          <div className="flex h-[400px] w-full flex-col items-center justify-center border-2 border-dotted border-gray-400 p-3 md:h-[500px]">
+        <div className="flex w-full items-center justify-center rounded-xl bg-gray-400/20 p-3 md:w-4/5">
+          <div className="flex h-[400px] w-full flex-col items-center justify-center rounded-md border-2 border-dotted border-gray-400 p-3 md:h-[500px]">
             {loading && <Spinner />}
             {!previewImage ? (
               <label className="flex cursor-pointer flex-col items-center justify-center">
@@ -108,7 +108,7 @@ const UploadImage = ({ user }) => {
                     uploadPercent
                       ? "cursor-not-allowed opacity-50 hover:bg-emerald-600 hover:text-white"
                       : "opacity-100"
-                  } flex w-full items-center justify-center gap-2 rounded-lg border border-emerald-600 bg-emerald-600 p-1 text-base text-slate-100 transition-all duration-500 ease-in-out hover:bg-transparent hover:text-black md:text-lg`}
+                  } btn`}
                   onClick={handleUploadImage}
                 >
                   {!uploadPercent ? (
@@ -127,7 +127,11 @@ const UploadImage = ({ user }) => {
         </div>
       </div>
       {/* UPLOAD FORM */}
-      <UploadImageForm user={user} imageUrl={imageUrl} />
+      <UploadImageForm
+        user={user}
+        imageUrl={imageUrl}
+        handleUploadImage={handleUploadImage}
+      />
     </div>
   );
 };
