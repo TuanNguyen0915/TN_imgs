@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
-import { MdDownloadForOffline } from "react-icons/md";
-import { MdDelete } from "react-icons/md";
+import {
+  MdDownloadForOffline,
+  MdOutlineImageSearch,
+  MdDelete,
+} from "react-icons/md";
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
 import { useState } from "react";
 import { saveAs } from "file-saver";
@@ -12,6 +15,7 @@ const ImageCard = ({ image }) => {
   const { currentUser } = useSelector((state) => state.user);
   const user = currentUser?.user;
   const [postHovered, setPostHovered] = useState(false);
+
   // download the image
   const downloadImage = async (e) => {
     e.stopPropagation();
@@ -19,6 +23,7 @@ const ImageCard = ({ image }) => {
     const data = await imageService.imageSaved(user._id, currentImage._id);
     setCurrentImage(data);
   };
+
   return (
     <div className="flex flex-col items-center justify-center p-2">
       <div
@@ -50,7 +55,7 @@ const ImageCard = ({ image }) => {
             </div>
             {/* show img source */}
             <div className="flex items-center justify-between gap-2 text-white">
-              <div className=" item-center ml-2 flex justify-center rounded-lg bg-white p-1 opacity-70 transition-all duration-150 ease-in hover:ml-5 hover:scale-125 hover:opacity-100">
+              <div className="ml-2 flex  items-center justify-center rounded-lg bg-white p-1 opacity-70 transition-all duration-150 ease-in hover:ml-5 hover:scale-125 hover:opacity-100">
                 <a
                   href={currentImage.url}
                   target="_blank"
@@ -61,8 +66,13 @@ const ImageCard = ({ image }) => {
                   <p className="text-[10px]">image url</p>
                 </a>
               </div>
+              <div className="hover: flex items-center justify-center rounded-lg bg-white p-1 opacity-70 transition-all duration-150 ease-in hover:mr-5 hover:scale-125 hover:opacity-100">
+                <Link to={`/images/${currentImage._id}`} className="flex items-center justify-center gap-2 px-2 text-black">
+                  <MdOutlineImageSearch /> <p className="text-[10px]">Details</p>
+                </Link>
+              </div>
               {/* show delete button if user = uploader photo */}
-              {user?._id === currentImage.addBy && (
+              {user?._id === currentImage.addBy._id && (
                 <div className="flex items-center justify-center rounded-full bg-white p-1 text-red-700 opacity-70 transition-all duration-150 ease-in hover:scale-[1.5] hover:opacity-100">
                   <MdDelete />
                 </div>

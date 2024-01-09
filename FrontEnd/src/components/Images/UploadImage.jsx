@@ -66,7 +66,6 @@ const UploadImage = ({ user }) => {
       },
     );
   };
-  console.log(previewImage)
   return (
     <div>
       <div className="container flex w-full items-center justify-center">
