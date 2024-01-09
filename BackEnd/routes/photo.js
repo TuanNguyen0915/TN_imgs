@@ -6,5 +6,6 @@ const router = Router()
 
 router.post('/upload-image',decodeUserFromToken, imageCtrl.uploadImage )
 router.get('/all', imageCtrl.allImages)
+router.get('/:imageId', imageCtrl.imageDetail)
 router.post('/saved', imageCtrl.addSaved)
 export {router}

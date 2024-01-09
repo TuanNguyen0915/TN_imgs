@@ -49,4 +49,14 @@ const uploadImaged = async (formData, url,token) => {
   }
 }
 
-export { allImages, imageSaved, uploadImaged };
+const imageDetail = async(imageId) => {
+  try {
+    const res = await fetch(`${SERVER_URL}/image/${imageId}`)
+    const json = await res.json()
+    return json
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export { allImages, imageSaved, uploadImaged, imageDetail };

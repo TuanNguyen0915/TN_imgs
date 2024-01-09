@@ -31,15 +31,29 @@ const addSaved = async (req, res, next) => {
       res.status(404)
       return next('Image not found')
     }
-    if(!photo.saved.includes(req.body.userId)){
+    if (!photo.saved.includes(req.body.userId)) {
       photo.saved.push(req.body.userId)
       await photo.save()
     }
-    return res.status(200).json({success: true, data:photo})
+    return res.status(200).json({ success: true, data: photo })
   } catch (error) {
     res.status(500)
     return next(error.message)
   }
 }
 
-export { uploadImage, allImages, addSaved }
+const imageDetail = async (req, res, next) => {
+  try {
+    const imageId = req.params.imageId
+    const image = await Photo.findById(imageId)
+    if(!image) {
+      res.status(404)
+      return next('Image not found')
+    }
+    return res.status(200).json({success: true, message: 'Found image info', image})
+  } catch (error) {
+    res.status(500)
+    return next(error.message)
+  }
+}
+export { uploadImage, allImages, addSaved, imageDetail }

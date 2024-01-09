@@ -63,7 +63,7 @@ const ImageCard = ({ image }) => {
                   className="flex items-center justify-center gap-2 px-2 text-black"
                 >
                   <BsFillArrowUpRightCircleFill className="outline-none" />
-                  <p className="text-[10px]">image url</p>
+                  <p className="text-[10px]">url</p>
                 </a>
               </div>
               <div className="hover: flex items-center justify-center rounded-lg bg-white p-1 opacity-70 transition-all duration-150 ease-in hover:mr-5 hover:scale-125 hover:opacity-100">
