@@ -29,4 +29,24 @@ const imageSaved = async (userId, imageId) => {
     throw new Error(error);
   }
 };
-export { allImages, imageSaved };
+
+const uploadImaged = async (formData, url,token) => {
+  try {
+    formData = { ...formData, url, token }
+    console.log(formData)
+    const res = await fetch(`${SERVER_URL}/image/upload-image`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(formData)
+    })
+    const json = await res.json()
+    return json
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export { allImages, imageSaved, uploadImaged };

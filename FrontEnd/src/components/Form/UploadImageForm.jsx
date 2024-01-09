@@ -1,24 +1,56 @@
 import { categoriesLink } from "../../utils/data/data";
 import BarSpinner from "../Spinner/ThreeDotsSpinner";
-import { useState } from "react";
+import {useState } from "react";
+import { uploadImaged } from "../../services/image";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const UploadImageForm = ({ user, imageUrl }) => {
+const UploadImageForm = ({ imageUrl }) => {
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user.currentUser);
+  const [errMess, setErrMess] = useState(null);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
-    desc: "",
-    url: imageUrl,
+    decs: "",
     category: "",
   });
-
+  
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  console.log(formData.url)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(formData.url);
+
+      setLoading(true);
+      const data = await uploadImaged(formData,imageUrl, user.token);
+      if (!data.success) {
+        setErrMess(data.message);
+        toast.error(data.message);
+      } else {
+        toast.success(data.message);
+        navigate("/");
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setErrMess(error.message);
+      toast.error(error.message);
+    }
+  };
   return (
     <div className="container mt-4 flex w-full justify-center">
       <div className="container flex w-full justify-center md:w-4/5">
-        <form className="flex w-full flex-col items-center justify-center gap-4">
+        <form
+          className="flex w-full flex-col items-center justify-center gap-4"
+          onSubmit={handleSubmit}
+        >
           <input
             type="text"
             name="title"
@@ -26,6 +58,7 @@ const UploadImageForm = ({ user, imageUrl }) => {
             placeholder="Add your title here"
             className="w-full rounded-lg bg-gray-400/20 px-4 py-1 opacity-80 outline-none focus-within:opacity-100 focus:shadow-md"
             onChange={handleChange}
+            required
           />
           <input
             type="text"
@@ -50,12 +83,19 @@ const UploadImageForm = ({ user, imageUrl }) => {
               ))}
             </select>
           </div>
-          <button disabled={loading} className={`btn uppercase ${loading?'bg-transparent border-none':''}`}>
+          <button
+            disabled={loading}
+            className={`btn uppercase ${
+              loading ? "border-none bg-transparent" : ""
+            }`}
+          >
             {loading ? (
-              <div className="w-full flex">
-                <BarSpinner w={100} h={40}  />
+              <div className="flex w-full">
+                <BarSpinner w={100} h={40} />
               </div>
-            )  : "upload image"}
+            ) : (
+              "Update information"
+            )}
           </button>
         </form>
       </div>

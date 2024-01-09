@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { FaImage } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
+import { toast } from "react-toastify";
 // upload to firebase
 import { app } from "../../utils/firebase";
 import {
@@ -36,6 +37,12 @@ const UploadImage = ({ user }) => {
     setPreviewImage(URL.createObjectURL(file));
   };
 
+  const handleDeleteImg = () => {
+    setUploadPercent(null)
+    setPreviewImage(null)
+    setImageUrl(null)
+  }
+
   const handleUploadImage = () => {
     const storage = getStorage(app);
     const fileName = `${image.size}-${image.name}`;
@@ -49,15 +56,17 @@ const UploadImage = ({ user }) => {
         setUploadPercent(Math.round(progress));
       },
       (error) => {
+        toast.error(error.message);
         throw new Error(error);
       },
       () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
-          setImageUrl(downloadURL),
-        );
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setImageUrl(downloadURL);
+        });
       },
     );
   };
+  console.log(previewImage)
   return (
     <div>
       <div className="container flex w-full items-center justify-center">
@@ -94,9 +103,7 @@ const UploadImage = ({ user }) => {
                         <MdDelete
                           size={25}
                           className="text-[#b00000] opacity-70 hover:opacity-100"
-                          onClick={() => {
-                            setPreviewImage(null), setUploadPercent(null);
-                          }}
+                          onClick={handleDeleteImg}
                         />
                       </div>
                     </div>
@@ -127,11 +134,15 @@ const UploadImage = ({ user }) => {
         </div>
       </div>
       {/* UPLOAD FORM */}
-      <UploadImageForm
-        user={user}
-        imageUrl={imageUrl}
-        handleUploadImage={handleUploadImage}
-      />
+      {uploadPercent ? (
+        <div className="animate-slide-in">
+          <UploadImageForm user={user} imageUrl={imageUrl} />
+        </div>
+      ) : (
+        <div className="animate-slide-out translate-x-[-100000px]">
+          <UploadImageForm user={user} imageUrl={imageUrl}/>
+        </div>
+      )}
     </div>
   );
 };

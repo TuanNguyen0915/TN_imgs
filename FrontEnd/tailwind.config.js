@@ -39,13 +39,13 @@ export default {
             "-webkit-transform": "translateZ(160px)",
             transform: "translateZ(160px)",
           },
-        },
+        }
       },
       animation: {
         "slide-in": "slide-in 0.5s ease-out",
         "slide-fwd":
           " slide-fwd 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
-        "slide-out": "slide-out 0.5s ease-out"
+        "slide-out": "slide-out 0.5s ease-out",
       },
       backgroundColor: {
         'blackCover': 'rgba(0,0,0,0.7)'

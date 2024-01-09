@@ -4,7 +4,7 @@ import User from '../models/user.js'
 const uploadImage = async (req, res, next) => {
   try {
     let newImage = await Photo.create(req.body)
-    let user = await User.findByIdAndUpdate(req.params.userId, { $push: { photos: newImage } }, { new: true })
+    let user = await User.findByIdAndUpdate(req.user._id, { $push: { photos: newImage } }, { new: true })
     newImage.addBy = user._id
     await newImage.save()
     res.status(201).json({ success: true, message: 'Upload successfully', data: newImage })
