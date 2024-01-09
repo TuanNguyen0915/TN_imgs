@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { FaChessKing, FaCloudUploadAlt } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { FaCloudUploadAlt } from "react-icons/fa";
 import { FaImage } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
-// import { categoriesLink } from "../../utils/data/data";
 // upload to firebase
 import { app } from "../../utils/firebase";
 import {
@@ -18,11 +17,19 @@ import UploadImageForm from "../Form/UploadImageForm";
 const UploadImage = ({ user }) => {
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [uploadError, setUploadError] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
+  const [uploadPercent, setUploadPercent] = useState(null);
   const [image, setImage] = useState(null);
 
-  const [uploadPercent, setUploadPercent] = useState(null);
+  // using useEffect to setLoading based on uploadedPercent
+  useEffect(() => {
+    !uploadPercent
+      ? setLoading(false)
+      : uploadPercent === 100
+        ? setLoading(false)
+        : setLoading(true);
+  }, [uploadPercent]);
+
   const handleChooseImage = (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -42,7 +49,7 @@ const UploadImage = ({ user }) => {
         setUploadPercent(Math.round(progress));
       },
       (error) => {
-        setUploadError(error);
+        throw new Error(error)
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
@@ -57,7 +64,6 @@ const UploadImage = ({ user }) => {
         <div className="flex w-full items-center justify-center rounded-lg bg-gray-400/20 p-3 md:w-4/5">
           <div className="flex h-[400px] w-full flex-col items-center justify-center border-2 border-dotted border-gray-400 p-3 md:h-[500px]">
             {loading && <Spinner />}
-
             {!previewImage ? (
               <label className="flex cursor-pointer flex-col items-center justify-center">
                 <FaImage size={40} className="text-emerald-600/80" />
@@ -75,35 +81,37 @@ const UploadImage = ({ user }) => {
               </label>
             ) : (
               <div className="flex flex-col items-center justify-center gap-4">
-                <div
-                  className="relative mt-8 h-[200px] w-[200px] rounded-lg md:h-[300px] md:w-[300px]"
-                  // onMouseEnter={() => setOnHover(true)}
-                  // onMouseLeave={() => setOnHover(false)}
-                >
-                  <img
-                    src={previewImage}
-                    alt="preview"
-                    className="h-full w-full rounded-lg object-cover"
-                  />
-                  {/* DELETE BUTTON */}
-                  <div className="absolute top-0 z-20 flex h-full w-full items-end justify-end rounded-lg p-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 md:h-10 md:w-10">
-                      <MdDelete
-                        size={25}
-                        className="text-[#b00000] opacity-70 hover:opacity-100"
-                        onClick={() => setPreviewImage(null)}
-                      />
+                {!loading && (
+                  <div className="relative mt-8 h-[200px] w-[200px] rounded-lg md:h-[300px] md:w-[300px]">
+                    <img
+                      src={previewImage}
+                      alt="preview"
+                      className="h-full w-full rounded-lg object-cover"
+                    />
+                    {/* DELETE BUTTON */}
+                    <div className="absolute top-0 z-20 flex h-full w-full items-end justify-end rounded-lg p-2">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/50 md:h-10 md:w-10">
+                        <MdDelete
+                          size={25}
+                          className="text-[#b00000] opacity-70 hover:opacity-100"
+                          onClick={() => {
+                            setPreviewImage(null), setUploadPercent(null);
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
                 <button
                   disabled={uploadPercent}
                   className={` ${
-                    uploadPercent ? "opacity-50 hover:bg-emerald-600 hover:text-white cursor-not-allowed" : "opacity-100"
+                    uploadPercent
+                      ? "cursor-not-allowed opacity-50 hover:bg-emerald-600 hover:text-white"
+                      : "opacity-100"
                   } flex w-full items-center justify-center gap-2 rounded-lg border border-emerald-600 bg-emerald-600 p-1 text-base text-slate-100 transition-all duration-500 ease-in-out hover:bg-transparent hover:text-black md:text-lg`}
                   onClick={handleUploadImage}
                 >
-                  {uploadPercent === null ? (
+                  {!uploadPercent ? (
                     <>
                       <FaCloudUploadAlt /> Upload
                     </>
