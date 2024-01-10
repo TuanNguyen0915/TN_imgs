@@ -75,7 +75,7 @@ const photosByCategory = async (req, res, next) => {
   try {
     const {categoryId} = req.params
     console.log(categoryId)
-    const images = await Photo.find({ category: categoryId })
+    const images = await Photo.find({ category: categoryId }).populate('addBy', '-password')
     if (!images) {
       res.status(404)
       return next('category not found')

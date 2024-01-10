@@ -95,4 +95,15 @@ const addComment = async (imageId, formData, token) => {
   }
 }
 
-export { allImages, imageSaved, uploadImaged, imageDetail, fetchImageSize, formatCreatedDate, addComment };
+const getImagesByCategory = async (category) => {
+  try {
+    
+    const res = await fetch(`${SERVER_URL}/image/category/${category}`)
+    const json = await res.json()
+    return json
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export { allImages, imageSaved, uploadImaged, imageDetail, fetchImageSize, formatCreatedDate, addComment, getImagesByCategory };
