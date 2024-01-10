@@ -21,7 +21,6 @@ const ImageCard = ({ image }) => {
     const data = await imageService.imageSaved(user._id, currentImage._id);
     setCurrentImage(data);
   };
-
   return (
     <div className="flex flex-col items-center justify-center p-2">
       <div

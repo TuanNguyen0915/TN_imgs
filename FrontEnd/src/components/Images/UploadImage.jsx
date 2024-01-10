@@ -30,7 +30,7 @@ const UploadImage = ({ user }) => {
         ? setLoading(false)
         : setLoading(true);
   }, [uploadPercent]);
-
+  
   const handleChooseImage = (e) => {
     const file = e.target.files[0];
     setImage(file);
