@@ -60,13 +60,12 @@ const imageDetail = async (req, res, next) => {
 const addComment = async (req, res, next) => {
   try {
     req.body.addBy = req.user
-    const selectedPhoto = await Photo.findByIdAndUpdate(req.params.imageId, { $push: { comments: req.body } }, { new: true })
-    if (!selectedPhoto) {
+    const image = await Photo.findByIdAndUpdate(req.params.imageId, { $push: { comments: req.body } }, { new: true })
+    if (!image) {
       res.status(404)
       return next('Image not found')
     }
-    const comment = selectedPhoto.comments[selectedPhoto.comments.length - 1]
-    return res.status(201).json({ success: true, message: 'Created new comment', comment })
+    return res.status(201).json({ success: true, message: 'Created new comment', image })
   } catch (error) {
     res.status(500)
     return next(error.message)
