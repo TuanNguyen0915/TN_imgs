@@ -13,10 +13,9 @@ const uploadImage = async (req, res, next) => {
     return next(error.message)
   }
 }
-
 const allImages = async (req, res, next) => {
   try {
-    let photos = await Photo.find({}).populate('addBy')
+    let photos = await Photo.find({}).populate('addBy').sort({createdAt: -1})
     res.status(200).json({ success: true, message: 'All images', data: photos })
   } catch (error) {
     res.status(500)
