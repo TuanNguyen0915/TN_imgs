@@ -9,8 +9,8 @@ const CommentForm = ({handleSubmit,user}) => {
     setFormData({...formData, [e.target.name]: e.target.value})
   }
 
-  const handleSubmitForm = e => {
-    e.preventDefault()
+  const handleSubmitForm = () => {
+    // e.preventDefault()
     handleSubmit(formData)
     setFormData({
       content: ""

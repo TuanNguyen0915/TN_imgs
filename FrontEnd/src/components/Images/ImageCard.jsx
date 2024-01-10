@@ -1,16 +1,14 @@
 import { Link } from "react-router-dom";
-import {
-  MdDownloadForOffline,
-  MdOutlineImageSearch,
-  MdDelete,
-} from "react-icons/md";
+import { MdDownloadForOffline, MdDelete } from "react-icons/md";
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
 import { useState } from "react";
 import { saveAs } from "file-saver";
 import { useSelector } from "react-redux";
 import * as imageService from "../../services/image";
+import { useNavigate } from "react-router-dom";
 
 const ImageCard = ({ image }) => {
+  const navigate = useNavigate();
   const [currentImage, setCurrentImage] = useState(image);
   const { currentUser } = useSelector((state) => state.user);
   const user = currentUser?.user;
@@ -31,6 +29,7 @@ const ImageCard = ({ image }) => {
         onMouseLeave={() => setPostHovered(false)}
         // onClick={() => navigate(`/image/${currentImage._id}`)}
         className={`relative w-auto cursor-zoom-in overflow-hidden rounded-lg transition-all duration-500 ease-in-out hover:shadow-lg`}
+        onClick={() => navigate(`/images/${currentImage._id}`)}
       >
         <img
           src={currentImage.url}
@@ -55,7 +54,10 @@ const ImageCard = ({ image }) => {
             </div>
             {/* show img source */}
             <div className="flex items-center justify-between gap-2 text-white">
-              <div className="ml-2 flex  items-center justify-center rounded-lg bg-white p-1 opacity-70 transition-all duration-150 ease-in hover:ml-5 hover:scale-125 hover:opacity-100">
+              <div
+                className="ml-2 flex  items-center justify-center rounded-lg bg-white p-1 opacity-70 transition-all duration-150 ease-in hover:ml-5 hover:scale-125 hover:opacity-100"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <a
                   href={currentImage.url}
                   target="_blank"
@@ -66,11 +68,11 @@ const ImageCard = ({ image }) => {
                   <p className="text-[10px]">url</p>
                 </a>
               </div>
-              <div className="hover: flex items-center justify-center rounded-lg bg-white p-1 opacity-70 transition-all duration-150 ease-in hover:mr-5 hover:scale-125 hover:opacity-100">
+              {/* <div className="hover: flex items-center justify-center rounded-lg bg-white p-1 opacity-70 transition-all duration-150 ease-in hover:mr-5 hover:scale-125 hover:opacity-100">
                 <Link to={`/images/${currentImage._id}`} className="flex items-center justify-center gap-2 px-2 text-black">
                   <MdOutlineImageSearch /> <p className="text-[10px]">Details</p>
                 </Link>
-              </div>
+              </div> */}
               {/* show delete button if user = uploader photo */}
               {user?._id === currentImage.addBy._id && (
                 <div className="flex items-center justify-center rounded-full bg-white p-1 text-red-700 opacity-70 transition-all duration-150 ease-in hover:scale-[1.5] hover:opacity-100">

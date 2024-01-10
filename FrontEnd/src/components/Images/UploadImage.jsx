@@ -38,10 +38,10 @@ const UploadImage = ({ user }) => {
   };
 
   const handleDeleteImg = () => {
-    setUploadPercent(null)
-    setPreviewImage(null)
-    setImageUrl(null)
-  }
+    setUploadPercent(null);
+    setPreviewImage(null);
+    setImageUrl(null);
+  };
 
   const handleUploadImage = () => {
     const storage = getStorage(app);
@@ -65,6 +65,7 @@ const UploadImage = ({ user }) => {
         });
       },
     );
+    setUploadPercent(null);
   };
   return (
     <div>
@@ -133,15 +134,15 @@ const UploadImage = ({ user }) => {
         </div>
       </div>
       {/* UPLOAD FORM */}
-      {uploadPercent ? (
-        <div className="animate-slide-in">
-          <UploadImageForm user={user} imageUrl={imageUrl} />
-        </div>
-      ) : (
-        <div className="animate-slide-out translate-x-[-100000px]">
-          <UploadImageForm user={user} imageUrl={imageUrl}/>
-        </div>
-      )}
+        {uploadPercent ? (
+          <div className="animate-slide-in">
+            <UploadImageForm user={user} imageUrl={imageUrl} />
+          </div>
+        ) : (
+          <div className="translate-x-[-100000px] animate-slide-out">
+            <UploadImageForm user={user} imageUrl={imageUrl} />
+          </div>
+        )}
     </div>
   );
 };

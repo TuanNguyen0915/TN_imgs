@@ -19,7 +19,7 @@ const ImageDetail = () => {
           className="rounded-lg object-contain"
         />
       </div>
-      <div className="container flex w-full flex-col justify-center gap-5 md:gap-8">
+      <div className="container flex flex-col justify-center gap-5 md:gap-8">
         <p className="text-4xl font-extrabold md:text-6xl">
           {currentImage.title}
         </p>
@@ -33,7 +33,7 @@ const ImageDetail = () => {
           rel="noreferrer"
           className="linkText"
         >
-          Highest resolution{" "}
+          Highest resolution
         </a>
         <div className="flex flex-col justify-center gap-5 md:flex-row md:items-center md:justify-between">
           <Link

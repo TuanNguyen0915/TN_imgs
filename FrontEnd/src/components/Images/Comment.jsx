@@ -5,6 +5,7 @@ import FromComment from "../Form/FormComment";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchImageSuccess } from "../../redux/image/imageSlice";
+import { Link } from "react-router-dom";
 
 const Comment = () => {
   const dispatch = useDispatch();
@@ -13,10 +14,12 @@ const Comment = () => {
   const { currentImage } = useSelector((state) => state.image);
   const [comments, setComments] = useState([]);
   useEffect(() => {
-    setComments(currentImage.comments);
+    let currentComments = currentImage.comments;
+    currentComments = [...currentComments].reverse();
+    setComments(currentComments);
   }, [currentImage.comments, dispatch]);
 
-  const handleSubmit = async ( formData) => {
+  const handleSubmit = async (formData) => {
     try {
       const data = await imageServices.addComment(
         currentImage._id,
@@ -26,25 +29,27 @@ const Comment = () => {
       if (!data.success) {
         toast.error(data.message);
       } else {
-        dispatch(fetchImageSuccess(data.image))
+        dispatch(fetchImageSuccess(data.image));
         toast.success(data.message);
       }
     } catch (error) {
+      console.log(error.message);
       toast.error(error.message);
     }
   };
-
   return (
     <div className="w-full">
       <h2 className="mt-3 text-2xl">Comments</h2>
       <div className="container mt-2 flex w-full flex-col gap-2 border-b border-slate-200 pb-2 md:mt-5">
         {comments.map((comment) => (
           <div key={comment._id} className="flex w-full items-center gap-4">
-            <img
-              src={comment.addBy.avatar}
-              alt=""
-              className="h-6 w-6 rounded-full"
-            />
+            <Link to={`/user/${comment.addBy?._id}`}>
+              <img
+                src={comment.addBy?.avatar}
+                alt=""
+                className="h-6 w-6 rounded-full"
+              />
+            </Link>
             <p>{comment.content}</p>
           </div>
         ))}
