@@ -1,3 +1,5 @@
+import { getImageSize } from 'react-image-size'
+
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 const allImages = async () => {
@@ -30,10 +32,9 @@ const imageSaved = async (userId, imageId) => {
   }
 };
 
-const uploadImaged = async (formData, url,token) => {
+const uploadImaged = async (formData, url, token) => {
   try {
-    formData = { ...formData, url, token }
-    console.log(formData)
+    formData = { ...formData, url}
     const res = await fetch(`${SERVER_URL}/image/upload-image`, {
       method: 'post',
       headers: {
@@ -49,7 +50,7 @@ const uploadImaged = async (formData, url,token) => {
   }
 }
 
-const imageDetail = async(imageId) => {
+const imageDetail = async (imageId) => {
   try {
     const res = await fetch(`${SERVER_URL}/image/${imageId}`)
     const json = await res.json()
@@ -59,4 +60,39 @@ const imageDetail = async(imageId) => {
   }
 }
 
-export { allImages, imageSaved, uploadImaged, imageDetail };
+const fetchImageSize = async (imgURL) => {
+  try {
+    const dimensions = await getImageSize(imgURL);
+    return dimensions
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+const formatCreatedDate = (date) => {
+  return new Date(date).toLocaleDateString("en-us", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+const addComment = async (imageId, formData, token) => {
+  try {
+    const res = await fetch(`${SERVER_URL}/image/${imageId}/comments`, {
+      method: 'put',
+      headers: {
+        "Content-Type": 'application/json',
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(formData)
+    })
+    const json = await res.json()
+    return json
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export { allImages, imageSaved, uploadImaged, imageDetail, fetchImageSize, formatCreatedDate, addComment };
