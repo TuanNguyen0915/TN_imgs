@@ -16,17 +16,16 @@ import {
 const ImageDetails = () => {
   const dispatch = useDispatch();
   const { imageId } = useParams();
-
   useEffect(() => {
     const fetchImage = async () => {
       try {
         dispatch(fetchImageStart());
-        const data = await imageService.imageDetail(imageId);
-        if (!data.success) {
-          toast.error(data.message);
-          dispatch(fetchImageFailure(data.message));
+        const res = await imageService.imageDetail(imageId);
+        if (!res.success) {
+          toast.error(res.message);
+          dispatch(fetchImageFailure(res.message));
         } else {
-          dispatch(fetchImageSuccess(data.image));
+          dispatch(fetchImageSuccess(res.data));
         }
       } catch (error) {
         toast.error(error.message);

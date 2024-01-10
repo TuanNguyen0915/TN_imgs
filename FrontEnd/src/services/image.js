@@ -6,7 +6,7 @@ const allImages = async () => {
   try {
     const res = await fetch(`${SERVER_URL}/image/all`);
     const json = await res.json();
-    return json.data;
+    return json;
   } catch (error) {
     throw new Error(error);
   }

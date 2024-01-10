@@ -33,7 +33,7 @@ const Comment = () => {
         toast.success(data.message);
       }
     } catch (error) {
-      console.log(error.message);
+      
       toast.error(error.message);
     }
   };

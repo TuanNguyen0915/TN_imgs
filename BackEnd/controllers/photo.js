@@ -49,7 +49,7 @@ const imageDetail = async (req, res, next) => {
       res.status(404)
       return next('Image not found')
     }
-    return res.status(200).json({ success: true, message: 'Found image info', image })
+    return res.status(200).json({ success: true, message: 'Found image info', data:image })
   } catch (error) {
     res.status(500)
     return next(error.message)
@@ -74,7 +74,7 @@ const addComment = async (req, res, next) => {
 const photosByCategory = async (req, res, next) => {
   try {
     const {categoryId} = req.params
-    console.log(categoryId)
+
     const images = await Photo.find({ category: categoryId }).populate('addBy', '-password')
     if (!images) {
       res.status(404)

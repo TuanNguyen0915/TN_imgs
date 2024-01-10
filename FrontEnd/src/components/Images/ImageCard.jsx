@@ -15,9 +15,9 @@ const ImageCard = ({ image }) => {
   const [postHovered, setPostHovered] = useState(false);
 
   // download the image
-  const downloadImage = async (e) => {
-    e.stopPropagation();
+  const downloadImage = async () => {
     saveAs(currentImage.url, `tn-img-${currentImage._id}`);
+    //update total download
     const data = await imageService.imageSaved(user._id, currentImage._id);
     setCurrentImage(data);
   };
@@ -26,9 +26,7 @@ const ImageCard = ({ image }) => {
       <div
         onMouseEnter={() => setPostHovered(true)}
         onMouseLeave={() => setPostHovered(false)}
-        // onClick={() => navigate(`/image/${currentImage._id}`)}
         className={`relative w-auto cursor-zoom-in overflow-hidden rounded-lg transition-all duration-500 ease-in-out hover:shadow-lg`}
-        onClick={() => navigate(`/images/${currentImage._id}`)}
       >
         <img
           src={currentImage.url}
@@ -53,25 +51,15 @@ const ImageCard = ({ image }) => {
             </div>
             {/* show img source */}
             <div className="flex items-center justify-between gap-2 text-white">
-              <div
-                className="ml-2 flex  items-center justify-center rounded-lg bg-white p-1 opacity-70 transition-all duration-150 ease-in hover:ml-5 hover:scale-125 hover:opacity-100"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <a
-                  href={currentImage.url}
-                  target="_blank"
-                  rel="noreferrer"
+              <div className="ml-2 flex  items-center justify-center rounded-lg bg-white p-1 opacity-70 transition-all duration-150 ease-in hover:ml-5 hover:scale-125 hover:opacity-100">
+                <div
                   className="flex items-center justify-center gap-2 px-2 text-black"
+                  onClick={() => navigate(`/images/${currentImage._id}`)}
                 >
                   <BsFillArrowUpRightCircleFill className="outline-none" />
-                  <p className="text-[10px]">url</p>
-                </a>
+                  <p className="text-[10px]">Details</p>
+                </div>
               </div>
-              {/* <div className="hover: flex items-center justify-center rounded-lg bg-white p-1 opacity-70 transition-all duration-150 ease-in hover:mr-5 hover:scale-125 hover:opacity-100">
-                <Link to={`/images/${currentImage._id}`} className="flex items-center justify-center gap-2 px-2 text-black">
-                  <MdOutlineImageSearch /> <p className="text-[10px]">Details</p>
-                </Link>
-              </div> */}
               {/* show delete button if user = uploader photo */}
               {user?._id === currentImage.addBy._id && (
                 <div className="flex items-center justify-center rounded-full bg-white p-1 text-red-700 opacity-70 transition-all duration-150 ease-in hover:scale-[1.5] hover:opacity-100">
@@ -83,6 +71,8 @@ const ImageCard = ({ image }) => {
         )}
       </div>
       {/* uploader's name */}
+      <div>
+      </div>
       <div className="mt-2 w-full">
         <Link
           to={`/user/${currentImage.addBy._id}`}
