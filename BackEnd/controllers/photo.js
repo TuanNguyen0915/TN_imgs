@@ -44,8 +44,8 @@ const addSaved = async (req, res, next) => {
 
 const imageDetail = async (req, res, next) => {
   try {
-    const image = await Photo.findById(req.params.imageId).populate('addBy','-password').populate('comments.addBy','-password')
-    
+    const image = await Photo.findById(req.params.imageId).populate('addBy', '-password').populate('comments.addBy', '-password')
+
     if (!image) {
       res.status(404)
       return next('Image not found')
@@ -72,6 +72,20 @@ const addComment = async (req, res, next) => {
   }
 }
 
+const photosByCategory = async (req, res, next) => {
+  try {
+    const {categoryId} = req.params
+    console.log(categoryId)
+    const images = await Photo.find({ category: categoryId })
+    if (!images) {
+      res.status(404)
+      return next('category not found')
+    }
+    return res.status(200).json({ success: true, message: 'Image(s) found', data: images })
+  } catch (error) {
+    res.status(500)
+    return next(error.message)
+  }
+}
 
-
-export { uploadImage, allImages, addSaved, imageDetail, addComment }
+export { uploadImage, allImages, addSaved, imageDetail, addComment, photosByCategory }
