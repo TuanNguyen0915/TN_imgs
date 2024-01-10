@@ -8,4 +8,6 @@ router.post('/upload-image',decodeUserFromToken, imageCtrl.uploadImage )
 router.get('/all', imageCtrl.allImages)
 router.get('/:imageId', imageCtrl.imageDetail)
 router.post('/saved', imageCtrl.addSaved)
+// comments
+router.put('/:imageId/comments', decodeUserFromToken, imageCtrl.addComment)
 export {router}

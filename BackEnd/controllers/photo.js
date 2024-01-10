@@ -44,16 +44,35 @@ const addSaved = async (req, res, next) => {
 
 const imageDetail = async (req, res, next) => {
   try {
-    const imageId = req.params.imageId
-    const image = await Photo.findById(imageId)
-    if(!image) {
+    const image = await Photo.findById(req.params.imageId).populate('addBy','-password').populate('comments.addBy','-password')
+    
+    if (!image) {
       res.status(404)
       return next('Image not found')
     }
-    return res.status(200).json({success: true, message: 'Found image info', image})
+    return res.status(200).json({ success: true, message: 'Found image info', image })
   } catch (error) {
     res.status(500)
     return next(error.message)
   }
 }
-export { uploadImage, allImages, addSaved, imageDetail }
+
+const addComment = async (req, res, next) => {
+  try {
+    req.body.addBy = req.user
+    const selectedPhoto = await Photo.findByIdAndUpdate(req.params.imageId, { $push: { comments: req.body } }, { new: true })
+    if (!selectedPhoto) {
+      res.status(404)
+      return next('Image not found')
+    }
+    const comment = selectedPhoto.comments[selectedPhoto.comments.length - 1]
+    return res.status(201).json({ success: true, message: 'Created new comment', comment })
+  } catch (error) {
+    res.status(500)
+    return next(error.message)
+  }
+}
+
+
+
+export { uploadImage, allImages, addSaved, imageDetail, addComment }
