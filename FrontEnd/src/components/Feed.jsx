@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import MasonryLayout from "./MasonryLayout";
-import Spinner from "./Spinner/CirclesSpinner";
+import {CirclesSpinner} from "./Spinner/Spinner";
 import { useEffect, useState } from "react";
 import * as imageServices from "../services/image";
 
@@ -16,7 +16,7 @@ const Feed = () => {
     fetchData();
   }, [categoryId]);
   if (loading)
-    return <Spinner message="We are adding new idea for your feed" />;
+    return <CirclesSpinner message="We are adding new idea for your feed" />;
   return (
     <div>
       {images && categoryId === undefined?<MasonryLayout images={images} />:categoryId}

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { NavBar, ImageDetail, Feed, Search } from "..";
+import { NavBar, Feed, Search } from "..";
 import UploadImg from "../../pages/UploadImg";
 import { useSelector } from "react-redux";
+import ImageDetails from "../../pages/ImageDetails";
 
 const Images = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -24,7 +25,7 @@ const Images = () => {
           <Route path="/category/:categoryId" element={<Feed />} />
           <Route
             path="/images/:imageId"
-            element={<ImageDetail user={user && user} />}
+            element={<ImageDetails />}
           />
           <Route path="/images/upload-image" element={<UploadImg />} />
           <Route

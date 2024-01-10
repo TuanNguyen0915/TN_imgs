@@ -1,5 +1,5 @@
 import { categoriesLink } from "../../utils/data/data";
-import BarSpinner from "../Spinner/ThreeDotsSpinner";
+import { ThreeDotsSpinner } from '../Spinner/Spinner'
 import {useState } from "react";
 import { uploadImaged } from "../../services/image";
 import { toast } from "react-toastify";
@@ -22,12 +22,9 @@ const UploadImageForm = ({ imageUrl }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  console.log(formData.url)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(formData.url);
-
       setLoading(true);
       const data = await uploadImaged(formData,imageUrl, user.token);
       if (!data.success) {
@@ -91,7 +88,7 @@ const UploadImageForm = ({ imageUrl }) => {
           >
             {loading ? (
               <div className="flex w-full">
-                <BarSpinner w={100} h={40} />
+                <ThreeDotsSpinner w={100} h={40} />
               </div>
             ) : (
               "Update information"

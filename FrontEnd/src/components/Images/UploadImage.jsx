@@ -12,7 +12,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 //components
-import Spinner from "../Spinner/CirclesSpinner";
+import { CirclesSpinner } from "../Spinner/Spinner";
 import UploadImageForm from "../Form/UploadImageForm";
 
 const UploadImage = ({ user }) => {
@@ -71,7 +71,7 @@ const UploadImage = ({ user }) => {
       <div className="container flex w-full items-center justify-center">
         <div className="flex w-full items-center justify-center rounded-xl bg-gray-400/20 p-3 md:w-4/5">
           <div className="flex h-[400px] w-full flex-col items-center justify-center rounded-md border-2 border-dotted border-gray-400 p-3 md:h-[500px]">
-            {loading && <Spinner />}
+            {loading && <CirclesSpinner />}
             {!previewImage ? (
               <label className="flex cursor-pointer flex-col items-center justify-center">
                 <FaImage size={40} className="text-emerald-600/80" />
