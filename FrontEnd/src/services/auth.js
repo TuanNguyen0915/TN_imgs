@@ -23,7 +23,6 @@ const login = async (formData) => {
   try {
     const res = await fetch(`${SERVER_URL}/user/login`, {
       method: 'post',
-      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -36,4 +35,20 @@ const login = async (formData) => {
   }
 }
 
-export {Auth, login}
+const register = async (formData) => {
+  try {
+    const res = await fetch(`${SERVER_URL}/user/register`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    const json = await res.json()
+    return json
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export {Auth, login, register}

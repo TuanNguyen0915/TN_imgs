@@ -1,4 +1,5 @@
-import loginVideo from "../assets/login_video.mp4";
+import { Link } from "react-router-dom";
+import loginVideo from "../assets/login-register.mp4";
 import whiteLogo from "../assets/white-logo.png";
 import GoogleLogin from "../components/Form/GoogleLogin";
 import LoginForm from "../components/Form/LoginForm";
@@ -18,10 +19,19 @@ const Login = () => {
         />
         <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-col items-center justify-center gap-2 bg-blackCover">
           <div className="h-[300px] w-[300px]">
-            <img src={whiteLogo} alt="logo" className="w-full" />
+            <img src={whiteLogo} alt="logo" className="w-full scale-125" />
           </div>
           <GoogleLogin />
           <LoginForm />
+          <h1 className="text-lg font-semibold text-white">
+            Don&#39;t you have account ?{" "}
+            <Link
+              to="/register"
+              className="text-emerald-400 hover:uppercase hover:text-white transition-all duration-500 ease-in-out"
+            >
+              Register
+            </Link>
+          </h1>
         </div>
       </div>
     </div>

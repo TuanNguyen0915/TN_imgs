@@ -26,7 +26,7 @@ const LoginForm = () => {
       const data = await authService.login(formData);
     if (!data.success) {
       dispatch(logInFailure(data.message))
-      toast.error(data);
+      toast.error(data.message);
     } else {
       dispatch(logInSuccess(data))
       toast.success(data.message);

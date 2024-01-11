@@ -20,7 +20,7 @@ const SideBar = ({ closeToggle }) => {
     "text-slate-700/60 flex items-center gap-3 px-5 transition-all duration-150 capitalize ease-in-out hover:text-emerald-600";
 
   return (
-    <div className="flex h-full min-w-[250px] flex-col justify-between gap-5 overflow-y-auto bg-white">
+    <div className="flex h-full min-w-[300px] flex-col justify-between gap-5 overflow-y-auto bg-white">
       <div>
         <div className="flex items-center justify-center">
           <Link
@@ -79,7 +79,7 @@ const SideBar = ({ closeToggle }) => {
         </div>
       </div>
 
-      {user && (
+      {user ? (
         <Link
           to={`user/${user._id}`}
           className="mx-3 my-5 mb-3 flex items-center gap-2 rounded-lg p-2 shadow-lg"
@@ -92,6 +92,14 @@ const SideBar = ({ closeToggle }) => {
           />
           <p>{user.name}</p>
         </Link>
+      ) : (
+        <div className="flex w-full flex-col items-center justify-center mb-10 gap-2 px-2">
+          <p>Please </p>
+          <Link to="/login" className="uppercase text-emerald-600 font-semibold hover:text-slate-400">
+            Login
+          </Link>
+          <p>to use full functionality</p>
+        </div>
       )}
     </div>
   );

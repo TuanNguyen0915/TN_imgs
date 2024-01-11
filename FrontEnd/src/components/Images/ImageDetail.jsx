@@ -34,7 +34,11 @@ const ImageDetail = () => {
   return (
     <div>
       {currentImage && (
-        <div className="container flex w-full flex-col items-center gap-5 md:flex-row md:gap-10">
+        <div
+          className={`${
+            currentUser ? "" : "mt-10"
+          } container flex w-full flex-col items-center gap-5 overflow-y-auto md:flex-row md:gap-1`}
+        >
           <div className="flex w-full items-center justify-center rounded-lg">
             <img
               src={currentImage.url}
