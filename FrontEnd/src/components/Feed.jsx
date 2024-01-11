@@ -3,8 +3,11 @@ import MasonryLayout from "./MasonryLayout";
 import { CirclesSpinner } from "./Spinner/Spinner";
 import { useEffect, useState } from "react";
 import * as imageServices from "../services/image";
+import { useDispatch } from "react-redux";
+import {getAllImages} from '../redux/image/allImagesSlice'
 
 const Feed = () => {
+  const dispatch = useDispatch();
   const { categoryId } = useParams();
   const [loading, setLoading] = useState(true);
   const [images, setImages] = useState([]);
@@ -13,6 +16,7 @@ const Feed = () => {
       const fetchData = async () => {
         const allData = await imageServices.allImages();
         setImages(allData.data);
+        dispatch(getAllImages(allData.data))
       };
       fetchData();
       setLoading(false);
