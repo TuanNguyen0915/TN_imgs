@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import { NavBar, Feed, Search } from "..";
 import UploadImg from "../../pages/UploadImg";
 import ImageDetails from "../../pages/ImageDetails";
-
 const Images = () => {
 
   const [searchTerm, setSearchTerm] = useState("");

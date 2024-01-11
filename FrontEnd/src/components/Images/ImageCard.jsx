@@ -6,6 +6,8 @@ import { saveAs } from "file-saver";
 import { useSelector } from "react-redux";
 import * as imageService from "../../services/image";
 import { useNavigate } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ImageCard = ({ image }) => {
   const navigate = useNavigate();
@@ -29,7 +31,8 @@ const ImageCard = ({ image }) => {
         onMouseLeave={() => setPostHovered(false)}
         className={`relative w-auto cursor-zoom-in overflow-hidden rounded-lg transition-all duration-500 ease-in-out hover:shadow-lg`}
       >
-        <img
+        <LazyLoadImage
+          effect="blur"
           src={currentImage.url}
           alt={currentImage.name}
           className={`${
@@ -87,7 +90,8 @@ const ImageCard = ({ image }) => {
           to={`/user/${image.addBy._id}`}
           className="flex items-center gap-2 hover:text-emerald-600"
         >
-          <img
+          <LazyLoadImage
+            effect="blur"
             src={image.addBy.avatar}
             referrerPolicy="no-referrer"
             alt="user's photo"

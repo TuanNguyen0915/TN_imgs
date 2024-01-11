@@ -1,21 +1,22 @@
 import { ThreeDots, Circles } from "react-loader-spinner";
 
-export const ThreeDotsSpinner = ({w,h, color}) => {
+export const ThreeDotsSpinner = ({ message, w, h, color }) => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       <ThreeDots
-        height= {`${h?h:'80'}`}
-        width={`${w?w:'80'}`}
-        color={`${color?color:'#4fa94d'}`}
+        height={`${h ? h : "80"}`}
+        width={`${w ? w : "80"}`}
+        color={`${color ? color : "#4fa94d"}`}
         ariaLabel="bars-loading"
         wrapperStyle={{}}
         wrapperClass=""
         visible={true}
       />
+
+      {message && <p className="px-2 text-center text-lg">{message}</p>}
     </div>
   );
 };
-
 
 export const CirclesSpinner = ({ message }) => {
   return (
@@ -33,4 +34,3 @@ export const CirclesSpinner = ({ message }) => {
     </div>
   );
 };
-
