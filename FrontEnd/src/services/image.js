@@ -80,6 +80,7 @@ const formatCreatedDate = (createAt) => {
 }
 
 const formatShortCreatedDate = (createAt) => {
+  
   const date = createAt.split("T")[0]
   return new Date(date).toLocaleDateString("en-us", {
     year: "numeric",

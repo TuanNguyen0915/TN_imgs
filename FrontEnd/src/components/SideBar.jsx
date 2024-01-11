@@ -7,9 +7,9 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 // SIDEBAR
-const SideBar = ({closeToggle }) => {
-  const {currentUser} = useSelector(state=>state.user)
-  const user = currentUser?.user
+const SideBar = ({ closeToggle }) => {
+  const { currentUser } = useSelector((state) => state.user);
+  const user = currentUser?.user;
   const handleCloseSideBar = () => {
     if (closeToggle) closeToggle(false);
   };
@@ -59,7 +59,10 @@ const SideBar = ({closeToggle }) => {
           {showCategories && (
             <div className="animate-slide-in">
               {categoriesLink.map((category) => (
-                <div key={category.name} className="mb-1 pl-10">
+                <div
+                  key={category.name}
+                  className="mb-1 flex items-center gap-2 pl-10"
+                >
                   <NavLink
                     to={`/category/${category.name}`}
                     className={(navClass) =>

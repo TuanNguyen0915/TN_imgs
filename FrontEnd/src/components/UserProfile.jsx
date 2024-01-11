@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { AiOutlineLogout } from "react-icons/ai";
 import { logOut } from "../redux/user/userSlice";
+import MasonryLayout from "./MasonryLayout";
 
 // get random banner
 const randomImage =
@@ -19,9 +20,8 @@ const UserProfile = () => {
   currentUser = currentUser?.user;
   const [user, setUser] = useState(null);
   const { userId } = useParams();
-  const [text, setText] = useState("Created");
-  const [activeBtn, setActiveBtn] = useState("created");
-
+  // const [text, setText] = useState("Created");
+  const [activeBtn, setActiveBtn] = useState("unfollow");
   //fetch user
   useEffect(() => {
     const fetchData = async () => {
@@ -45,19 +45,24 @@ const UserProfile = () => {
     navigate("/");
   };
 
+  const activeBtnStyles =
+    "bg-emerald-600  text-white font-bold p-2 rounded-full min-w-[110px] outline-none";
+  const notActiveBtnStyles =
+    "border-slate-400 border text-black font-bold p-2 rounded-full min-w-[110px] outline-none";
+
   if (!user) {
     return <CirclesSpinner message="Loading profile ..." />;
   }
 
   return (
-    <div className="container relative h-full items-center justify-center pb-2">
+    <div className="container relative h-full items-center justify-center pb-2 ">
       <div className="flex flex-col pb-5">
         <div className="relative mb-7 flex flex-col">
           {/* BANNER, AVATAR AND LOGOUT BUTTON */}
           <div className="mt-5 flex flex-col items-center justify-center">
             <img
               src={randomImage}
-              className="h-[300px] w-full rounded-lg object-cover shadow-lg md:h-[400px]"
+              className="h-[300px] w-full rounded-lg object-cover shadow-lg md:h-[400px] "
               alt="banner"
             />
             <img
@@ -65,11 +70,13 @@ const UserProfile = () => {
               alt="avatar"
               className="-mt-10 h-20 w-20 rounded-full shadow-2xl shadow-black"
             />
-            <h1 className="mt-5 text-center text-3xl md:text-5xl font-bold">{user.name}</h1>
+            <h1 className="mt-5 text-center text-3xl font-bold md:text-5xl">
+              {user.name}
+            </h1>
             <div className="z-1 absolute right-5 top-10 p-2">
               {currentUser?._id === userId && (
                 <button
-                  className="rounded-lg border-red-400 bg-red-400  p-2 text-white hover:bg-red-600 transition-all duration-300 ease-in-out"
+                  className="rounded-lg border-red-400 bg-red-400  p-2 text-white transition-all duration-300 ease-in-out hover:bg-red-600"
                   onClick={handleLogout}
                 >
                   <AiOutlineLogout size={30} />
@@ -78,18 +85,28 @@ const UserProfile = () => {
             </div>
           </div>
           {/* USER INFO */}
-          <div className="mb-7 text-center">
+          <div className="my-5 text-center">
             <button
               type="button"
-              onClick={(e) => {
-                setText(e.target.textContent);
-                setActiveBtn("created");
-              }}
-              // className={`${
-              //   activeBtn === "created" ? activeBtnStyles : notActiveBtnStyles
-              // }`}
-            ></button>
+              onClick={() => setActiveBtn("follow")}
+              className={`${
+                activeBtn === "follow" ? activeBtnStyles : notActiveBtnStyles
+              }`}
+            >
+              Follow
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveBtn("unfollow")}
+              className={`${
+                activeBtn === "unfollow" ? activeBtnStyles : notActiveBtnStyles
+              } ml-2`}
+            >
+              Unfollow
+            </button>
           </div>
+          {/* SHOW ALL PHOTOS OF THIS USER */}
+          {currentUser.photos ? <MasonryLayout images={user.photos}/> : <div>dont have photo</div>}
         </div>
       </div>
     </div>

@@ -22,7 +22,6 @@ const ImageCard = ({ image }) => {
     const data = await imageService.imageSaved(user._id, currentImage._id);
     setCurrentImage(data);
   };
-
   return (
     <div className="mx-2 mb-10 flex flex-col items-center justify-center">
       <div
@@ -51,7 +50,7 @@ const ImageCard = ({ image }) => {
               />
               <div className="flex items-center justify-center rounded-lg bg-red-500 px-2 py-1 opacity-70 transition-all duration-150 ease-in hover:mr-2 hover:scale-125 hover:opacity-100">
                 <button type="button" className="text-[12px]">
-                  Saved: {currentImage.saved.length}
+                  Downloads: {currentImage.saved.length}
                 </button>
               </div>
             </div>
@@ -85,16 +84,16 @@ const ImageCard = ({ image }) => {
       <div></div>
       <div className="mt-2 flex w-full items-center justify-between">
         <Link
-          to={`/user/${currentImage.addBy._id}`}
+          to={`/user/${image.addBy._id}`}
           className="flex items-center gap-2 hover:text-emerald-600"
         >
           <img
-            src={currentImage.addBy.avatar}
+            src={image.addBy.avatar}
             referrerPolicy="no-referrer"
             alt="user's photo"
             className="h-6 w-6 rounded-full"
           />
-          <p className="text-sm">{currentImage.addBy.name}</p>
+          <p className="text-sm">{image.addBy.name}</p>
         </Link>
         {publicAt && (
           <p className="text-[10px] italic text-slate-500">{publicAt}</p>
