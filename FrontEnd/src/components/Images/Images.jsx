@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { NavBar, Feed, Search } from "..";
 import UploadImg from "../../pages/UploadImg";
 import ImageDetails from "../../pages/ImageDetails";
-const Images = () => {
+const Images = ({theme,setTheme}) => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -13,6 +13,8 @@ const Images = () => {
         <NavBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          theme={theme}
+          setTheme={setTheme}
         />
       </div>
       <div className="h-full ">

@@ -29,7 +29,7 @@ const Search = ({ searchTerm }) => {
   }, [searchTerm]);
 
   return (
-    <div>
+    <div className="dark:text-slate-200">
       {loading && <CirclesSpinner message="Searching pins" />}
       {images?.length !== 0 && <MasonryLayout images={images && images} />}
       {images?.length === 0 && searchTerm !== '' && !loading && (

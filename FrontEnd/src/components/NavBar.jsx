@@ -9,7 +9,7 @@ const NavBar = ({ searchTerm, setSearchTerm }) => {
   const navigate = useNavigate();
   if (!user) return null;
   return (
-    <div className="mt-5 flex w-full items-center gap-2 pb-7 md:gap-5">
+    <div className="mt-5 flex w-full items-center gap-2 pb-7 md:gap-5 dark:bg-slate-900 dark:text-gray-100">
       <div className="flex h-10 w-full items-center justify-start gap-4 rounded-md border-none bg-white p-2 shadow-sm outline-none focus-within:shadow-lg md:h-12">
         <IoMdSearch fontSize={20} className="ml-2" />
         <input
@@ -34,7 +34,7 @@ const NavBar = ({ searchTerm, setSearchTerm }) => {
         </div>
         <Link
           to={`/images/upload-image`}
-          className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-800 text-white md:h-12 md:w-12"
+          className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 dark:bg-slate-300 text-white md:h-12 md:w-12"
         >
           <IoMdAdd fontSize={24} />
         </Link>

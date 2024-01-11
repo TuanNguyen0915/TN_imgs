@@ -46,16 +46,16 @@ const UserProfile = () => {
   };
 
   const activeBtnStyles =
-    "bg-emerald-600  text-white font-bold p-2 rounded-full min-w-[110px] outline-none";
+    "bg-emerald-600  text-white font-bold p-2 rounded-full min-w-[110px] outline-none dark:text-slate-200";
   const notActiveBtnStyles =
-    "border-slate-400 border text-black font-bold p-2 rounded-full min-w-[110px] outline-none";
+    "border-slate-400 border text-black font-bold p-2 rounded-full min-w-[110px] outline-none dark:text-slate-200";
 
   if (!user) {
     return <CirclesSpinner message="Loading profile ..." />;
   }
 
   return (
-    <div className="container relative h-full items-center justify-center pb-2 ">
+    <div className="container relative h-full items-center justify-center pb-2 dark:text-slate-200">
       <div className="flex flex-col pb-5">
         <div className="relative mb-7 flex flex-col">
           {/* BANNER, AVATAR AND LOGOUT BUTTON */}

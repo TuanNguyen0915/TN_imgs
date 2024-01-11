@@ -42,7 +42,7 @@ const UploadImageForm = ({ imageUrl }) => {
     }
   };
   return (
-    <div className="container mt-4 flex w-full justify-center">
+    <div className="container mt-4 flex w-full justify-center dark:text-slate-200">
       <div className="container flex w-full justify-center md:w-4/5">
         <form
           className="flex w-full flex-col items-center justify-center gap-4"

@@ -10,6 +10,7 @@ import UserProfile from "../components/UserProfile";
 import { Route, Routes } from "react-router-dom";
 
 const Home = () => {
+
   const scrollRef = useRef(null);
   const { currentUser } = useSelector((state) => state.user);
   const user = currentUser?.user;
@@ -19,8 +20,9 @@ const Home = () => {
     scrollRef.current.scrollTo(0, 0);
   }, []);
 
+
   return (
-    <div className="flex h-screen flex-col bg-gray-50 duration-75 ease-out md:flex-row">
+    <div className="dark:text-gray-100 flex h-screen flex-col bg-gray-50 duration-100 ease-out md:flex-row dark:bg-slate-900">
       {/* DESKTOP VIEW */}
       <div className="hidden h-screen md:flex">
         <SideBar user={user && user} />
@@ -30,7 +32,7 @@ const Home = () => {
         <div className="flex w-full flex-row items-center justify-between p-2 shadow-lg">
           <HiMenu
             fontSize={40}
-            className="cursor-pointer"
+            className="cursor-pointer dark:text-slate-200"
             onClick={() => setToggleSidebar(true)}
           />
           <Link to="/">
@@ -51,7 +53,7 @@ const Home = () => {
             <div className="absolute flex w-full items-center justify-end p-2">
               <AiFillCloseCircle
                 fontSize={30}
-                className="cursor-pointer"
+                className="cursor-pointer dark:text-slate-200"
                 onClick={() => setToggleSidebar(false)}
               />
             </div>
@@ -62,7 +64,12 @@ const Home = () => {
       <div className="h-screen flex-1 overflow-y-scroll pb-2" ref={scrollRef}>
         <Routes>
           <Route path="/user/:userId" element={<UserProfile />} />
-          <Route path="/*" element={<Images user={user && user} />} />
+          <Route
+            path="/*"
+            element={
+              <Images user={user && user} />
+            }
+          />
         </Routes>
       </div>
     </div>

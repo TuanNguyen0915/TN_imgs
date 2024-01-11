@@ -32,18 +32,18 @@ const ImageDetail = () => {
     }
   };
   return (
-    <div>
+    <div className="dark:text-slate-200">
       {currentImage && (
         <div
           className={`${
             currentUser ? "" : "mt-10"
           } container flex w-full flex-col items-center gap-5 overflow-y-auto md:flex-row md:gap-1`}
         >
-          <div className="flex w-full items-center justify-center rounded-lg mr-5 shadow-lg shadow-emerald-600">
+          <div className="flex w-full items-center justify-center rounded-lg mr-5 pb-5">
             <img
               src={currentImage.url}
               alt={currentImage.name}
-              className="m-auto max-h-[700px] rounded-lg object-contain"
+              className="m-auto max-h-[700px] rounded-lg object-contain shadow-lg shadow-emerald-600"
             />
           </div>
           <div className="container flex flex-col justify-center gap-5 md:gap-8">
@@ -68,7 +68,7 @@ const ImageDetail = () => {
             <div className="flex flex-col justify-center gap-5 md:flex-row md:items-center md:justify-between">
               <Link
                 to={`/user/${currentImage.addBy._id}`}
-                className="linkText flex items-center gap-5 font-semibold text-black"
+                className="linkText flex items-center gap-5 font-semibold text-black dark:text-slate-200"
               >
                 <img
                   src={currentImage.addBy.avatar}
