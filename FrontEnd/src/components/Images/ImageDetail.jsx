@@ -39,7 +39,7 @@ const ImageDetail = () => {
             currentUser ? "" : "mt-10"
           } container flex w-full flex-col items-center gap-5 overflow-y-auto md:flex-row md:gap-1`}
         >
-          <div className="flex w-full items-center justify-center rounded-lg">
+          <div className="flex w-full items-center justify-center rounded-lg mr-5 shadow-lg shadow-emerald-600">
             <img
               src={currentImage.url}
               alt={currentImage.name}
@@ -47,12 +47,12 @@ const ImageDetail = () => {
             />
           </div>
           <div className="container flex flex-col justify-center gap-5 md:gap-8">
-            <p className="text-4xl font-extrabold md:text-6xl">
+            <p className="text-3xl font-extrabold md:text-4xl">
               {currentImage.title}
             </p>
             <Link
               to={`/category/${currentImage.category}`}
-              className="linkText"
+              className="linkText md:text-xl text-base"
             >
               <p>{currentImage.category}</p>
             </Link>
