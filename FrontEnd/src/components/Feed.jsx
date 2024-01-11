@@ -28,7 +28,7 @@ const Feed = () => {
       fetchData();
       setLoading(false);
     }
-  }, [categoryId]);
+  },[categoryId, dispatch]);
 
   return (
     <div className="container">

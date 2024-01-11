@@ -20,9 +20,9 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="transition-height flex h-screen flex-col bg-gray-50 duration-75 ease-out md:flex-row">
+    <div className="flex h-screen flex-col bg-gray-50 duration-75 ease-out md:flex-row">
       {/* DESKTOP VIEW */}
-      <div className="hidden h-screen flex-initial md:flex">
+      <div className="hidden h-screen md:flex">
         <SideBar user={user && user} />
       </div>
       {/* MOBILE VIEW */}

@@ -5,7 +5,7 @@ const commentSchema = new mongoose.Schema({
   addBy: { type: Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true })
 
-const photoSchema = new mongoose.Schema({
+const imageSchema = new mongoose.Schema({
   title: { type: String, required: true },
   decs: { type: String },
   url: { type: String, required: true },
@@ -16,6 +16,6 @@ const photoSchema = new mongoose.Schema({
   comments: [commentSchema]
 }, { timestamps: true })
 
-const Photo = mongoose.model('Photo', photoSchema)
+const Image = mongoose.model('Image', imageSchema)
 
-export default Photo
+export default Image

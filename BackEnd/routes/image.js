@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import * as imageCtrl from '../controllers/photo.js'
+import * as imageCtrl from '../controllers/image.js'
 import { decodeUserFromToken } from '../middleware/Auth.js'
 
 const router = Router()

@@ -106,7 +106,7 @@ const UserProfile = () => {
             </button>
           </div>
           {/* SHOW ALL PHOTOS OF THIS USER */}
-          {user?.photos ? <MasonryLayout images={user.photos}/> : <div>dont have photo</div>}
+          {user?.images ? <MasonryLayout images={user.images}/> : <div>dont have photo</div>}
         </div>
       </div>
     </div>

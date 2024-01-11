@@ -11,7 +11,6 @@ const breakpointObj = {
 };
 
 const MasonryLayout = ({ images }) => {
-  console.log(images)
   return (
     <Masonry
       className="mt-5 flex animate-slide-fwd md:mt-10 "

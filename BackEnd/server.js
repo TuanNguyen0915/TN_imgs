@@ -8,7 +8,7 @@ import './configs/database.js'
 
 // import routers
 import { router as authRouter } from './routes/auth.js'
-import { router as imgRouter } from './routes/photo.js'
+import { router as imgRouter } from './routes/image.js'
 
 const app = express()
 const PORT = process.env.PORT

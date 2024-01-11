@@ -1,10 +1,10 @@
-import Photo from '../models/photo.js'
+import Image from '../models/image.js'
 import User from '../models/user.js'
 
 const uploadImage = async (req, res, next) => {
   try {
-    let newImage = await Photo.create(req.body)
-    let user = await User.findByIdAndUpdate(req.user._id, { $push: { photos: newImage } }, { new: true })
+    let newImage = await Image.create(req.body)
+    let user = await User.findByIdAndUpdate(req.user._id, { $push: { images: newImage } }, { new: true })
     newImage.addBy = user._id
     await newImage.save()
     res.status(201).json({ success: true, message: 'Upload successfully', data: newImage })
@@ -15,8 +15,8 @@ const uploadImage = async (req, res, next) => {
 }
 const allImages = async (req, res, next) => {
   try {
-    let photos = await Photo.find({}).populate('addBy').sort({createdAt: -1})
-    res.status(200).json({ success: true, message: 'All images', data: photos })
+    let images = await Image.find({}).populate('addBy').sort({ createdAt: -1 })
+    res.status(200).json({ success: true, message: 'All images', data: images })
   } catch (error) {
     res.status(500)
     return next(error.message)
@@ -25,16 +25,16 @@ const allImages = async (req, res, next) => {
 
 const addSaved = async (req, res, next) => {
   try {
-    let photo = await Photo.findById(req.body.imageId)
-    if (!photo) {
+    let image = await Image.findById(req.body.imageId)
+    if (!image) {
       res.status(404)
       return next('Image not found')
     }
-    if (!photo.saved.includes(req.body.userId)) {
-      photo.saved.push(req.body.userId)
-      await photo.save()
+    if (!image.saved.includes(req.body.userId)) {
+      image.saved.push(req.body.userId)
+      await image.save()
     }
-    return res.status(200).json({ success: true, data: photo })
+    return res.status(200).json({ success: true, data: image })
   } catch (error) {
     res.status(500)
     return next(error.message)
@@ -43,13 +43,13 @@ const addSaved = async (req, res, next) => {
 
 const imageDetail = async (req, res, next) => {
   try {
-    const image = await Photo.findById(req.params.imageId).populate('addBy', '-password').populate('comments.addBy', '-password')
+    const image = await Image.findById(req.params.imageId).populate('addBy', '-password').populate('comments.addBy', '-password')
 
     if (!image) {
       res.status(404)
       return next('Image not found')
     }
-    return res.status(200).json({ success: true, message: 'Found image info', data:image })
+    return res.status(200).json({ success: true, message: 'Found image info', data: image })
   } catch (error) {
     res.status(500)
     return next(error.message)
@@ -59,12 +59,12 @@ const imageDetail = async (req, res, next) => {
 const addComment = async (req, res, next) => {
   try {
     req.body.addBy = req.user
-    const image = await Photo.findByIdAndUpdate(req.params.imageId, { $push: { comments: req.body } }, { new: true })
+    const image = await Image.findByIdAndUpdate(req.params.imageId, { $push: { comments: req.body } }, { new: true })
     if (!image) {
       res.status(404)
       return next('Image not found')
     }
-    return res.status(201).json({ success: true, message: 'Created new comment', image })
+    return res.status(201).json({ success: true, message: 'Created new comment', data: image })
   } catch (error) {
     res.status(500)
     return next(error.message)
@@ -73,9 +73,9 @@ const addComment = async (req, res, next) => {
 
 const photosByCategory = async (req, res, next) => {
   try {
-    const {categoryId} = req.params
+    const { categoryId } = req.params
 
-    const images = await Photo.find({ category: categoryId }).populate('addBy', '-password')
+    const images = await Image.find({ category: categoryId }).populate('addBy', '-password')
     if (!images) {
       res.status(404)
       return next('category not found')

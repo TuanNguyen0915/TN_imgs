@@ -110,7 +110,7 @@ const login = async (req, res, next) => {
 // ---------------------- USER DETAILS -------------------------
 const userDetails = async (req, res, next) => {
   try {
-    let user = await User.findById(req.params.userId).populate('photos')
+    let user = await User.findById(req.params.userId).populate('images')
     if (!user) {
       res.status(404)
       return next('User not found')

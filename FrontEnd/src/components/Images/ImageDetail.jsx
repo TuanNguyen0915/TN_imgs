@@ -9,7 +9,6 @@ import MasonryLayout from "../MasonryLayout";
 import { FaArrowDown } from "react-icons/fa";
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
 
-
 const ImageDetail = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { currentImage } = useSelector((state) => state.image);
@@ -36,12 +35,11 @@ const ImageDetail = () => {
     <div>
       {currentImage && (
         <div className="container flex w-full flex-col items-center gap-5 md:flex-row md:gap-10">
-          <div className="w-full">
+          <div className="flex w-full items-center justify-center rounded-lg">
             <img
               src={currentImage.url}
               alt={currentImage.name}
-              referrerPolicy="no-referrer"
-              className="rounded-lg object-contain"
+              className="m-auto max-h-[700px] rounded-lg object-contain"
             />
           </div>
           <div className="container flex flex-col justify-center gap-5 md:gap-8">

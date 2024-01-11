@@ -9,13 +9,10 @@ export const categoriesLink = [
     name: "wallpaper",
   },
   {
-    name: "websites",
-  },
-  {
     name: "photo",
   },
   {
-    name: "food",
+    name: "game",
   },
   {
     name: "nature",
@@ -26,14 +23,9 @@ export const categoriesLink = [
   {
     name: "travel",
   },
+  
   {
-    name: "quotes",
-  },
-  {
-    name: "cats",
-  },
-  {
-    name: "dogs",
+    name: "animals",
   },
   {
     name: "others",
