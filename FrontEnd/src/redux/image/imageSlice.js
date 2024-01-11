@@ -21,7 +21,7 @@ const imageSlice = createSlice({
     fetchImageFailure: (state, action) => {
       state.loading = false
       state.error = action.payload
-    }
+    },
   }
 })
 
