@@ -39,6 +39,17 @@ export default {
             "-webkit-transform": "translateZ(160px)",
             transform: "translateZ(160px)",
           },
+        },
+        "full-width": {
+          "0%": {
+            "width": "20%"
+          },
+          "50%": {
+            "width": '50%'
+          },
+          "100%": {
+            "width": '100%'
+          }
         }
       },
       animation: {
@@ -46,6 +57,7 @@ export default {
         "slide-fwd":
           " slide-fwd 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
         "slide-out": "slide-out 0.5s ease-out",
+        "full-width": "full-width 0.3s linear both"
       },
       backgroundColor: {
         'blackCover': 'rgba(0,0,0,0.7)'

@@ -1,13 +1,15 @@
 import { NavLink, Link } from "react-router-dom";
 import { RiHomeFill } from "react-icons/ri";
 import { IoIosArrowDown } from "react-icons/io";
-
 import logo from "../assets/black-logo.png";
 import { categoriesLink } from "../utils/data/data";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 // SIDEBAR
-const SideBar = ({ user, closeToggle }) => {
+const SideBar = ({closeToggle }) => {
+  const {currentUser} = useSelector(state=>state.user)
+  const user = currentUser?.user
   const handleCloseSideBar = () => {
     if (closeToggle) closeToggle(false);
   };
@@ -81,7 +83,7 @@ const SideBar = ({ user, closeToggle }) => {
           onClick={handleCloseSideBar}
         >
           <img
-            src={user.avatar}
+            src={user?.avatar}
             alt="user's avatar"
             className="h-10 w-10 rounded-full"
           />

@@ -21,7 +21,7 @@ const Home = () => {
 
   return (
     <div className="transition-height flex h-screen flex-col bg-gray-50 duration-75 ease-out md:flex-row">
-    {/* DESKTOP VIEW */}
+      {/* DESKTOP VIEW */}
       <div className="hidden h-screen flex-initial md:flex">
         <SideBar user={user && user} />
       </div>
@@ -36,13 +36,15 @@ const Home = () => {
           <Link to="/">
             <img src={logo} alt="logo" className="w-[80px]" />
           </Link>
-          <Link to={`user/${user?._id}`}>
-            <img
-              src={user?.avatar}
-              alt="user-pic"
-              className="h-9 w-9 rounded-full mr-4"
-            />
-          </Link>
+          {user && (
+            <Link to={`user/${user._id}`}>
+              <img
+                src={user.avatar}
+                alt="user-pic"
+                className="mr-4 h-9 w-9 rounded-full"
+              />
+            </Link>
+          )}
         </div>
         {toggleSidebar && (
           <div className="fixed z-10 h-screen w-4/5 animate-slide-in overflow-y-auto bg-white shadow-md">
@@ -57,10 +59,7 @@ const Home = () => {
           </div>
         )}
       </div>
-      <div
-        className="h-screen flex-1 overflow-y-scroll pb-2"
-        ref={scrollRef}
-      >
+      <div className="h-screen flex-1 overflow-y-scroll pb-2" ref={scrollRef}>
         <Routes>
           <Route path="/user/:userId" element={<UserProfile />} />
           <Route path="/*" element={<Images user={user && user} />} />

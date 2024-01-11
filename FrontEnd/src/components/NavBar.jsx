@@ -1,8 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdAdd, IoMdSearch } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 //NAVBAR
-const NavBar = ({ searchTerm, setSearchTerm, user }) => {
+const NavBar = ({ searchTerm, setSearchTerm }) => {
+  const {currentUser} = useSelector(state => state.user)
+  const user = currentUser?.user
   const navigate = useNavigate();
   if (!user) return null;
   return (

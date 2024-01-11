@@ -2,12 +2,10 @@ import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { NavBar, Feed, Search } from "..";
 import UploadImg from "../../pages/UploadImg";
-import { useSelector } from "react-redux";
 import ImageDetails from "../../pages/ImageDetails";
 
 const Images = () => {
-  const { currentUser } = useSelector((state) => state.user);
-  const user = currentUser?.user;
+
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
@@ -16,7 +14,6 @@ const Images = () => {
         <NavBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-          user={user}
         />
       </div>
       <div className="h-full ">

@@ -26,25 +26,25 @@ const Feed = () => {
     }
   }, [categoryId]);
 
-
-
   return (
     <div className="container">
       {loading ? (
-        <CirclesSpinner message="We are adding new idea for your feed" />
+        <div className="mt-10">
+          <CirclesSpinner message="We are adding new idea for your feed" />
+        </div>
       ) : (
         <div>
-          {images.length !==0? (
-            <MasonryLayout images={images}/>
-          ):(
-            <div className="flex w-full h-full items-center justify-center">
-              <CirclesSpinner message={`We are adding new idea for ${categoryId?.toUpperCase()}`} />
+          {images.length !== 0 ? (
+            <MasonryLayout images={images} />
+          ) : (
+            <div className="flex h-[600px] w-full items-center justify-center">
+              <CirclesSpinner
+                message={`We are adding new idea for ${categoryId?.toUpperCase()}`}
+              />
             </div>
           )}
         </div>
-      
-      )} 
-      
+      )}
     </div>
   );
 };

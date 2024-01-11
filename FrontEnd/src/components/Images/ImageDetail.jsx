@@ -15,7 +15,7 @@ const ImageDetail = () => {
   const { currentImage } = useSelector((state) => state.image);
   const [imagesByCate, setImagesByCate] = useState([]);
   const [showMore, setShowMore] = useState(false);
-  const publicAt = formatCreatedDate(currentImage?.createdAt?.split("T")[0]);
+  const publicAt = formatCreatedDate(currentImage?.createdAt);
   const handleClickShowMore = async () => {
     try {
       let orgData = await getImagesByCategory(currentImage.category);
@@ -80,7 +80,7 @@ const ImageDetail = () => {
               </p>
             </div>
             {/* IF USER IS UPLOADER */}
-            {currentUser.user._id === currentImage.addBy._id && (
+            {currentUser?.user._id === currentImage.addBy._id && (
               <div className="flex items-center justify-between gap-5">
                 <button type="button" className="btn">
                   EDIT

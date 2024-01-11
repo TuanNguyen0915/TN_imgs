@@ -34,7 +34,7 @@ const imageSaved = async (userId, imageId) => {
 
 const uploadImaged = async (formData, url, token) => {
   try {
-    formData = { ...formData, url}
+    formData = { ...formData, url }
     const res = await fetch(`${SERVER_URL}/image/upload-image`, {
       method: 'post',
       headers: {
@@ -69,11 +69,21 @@ const fetchImageSize = async (imgURL) => {
   }
 }
 
-const formatCreatedDate = (date) => {
+const formatCreatedDate = (createAt) => {
+  const date = createAt.split("T")[0]
   return new Date(date).toLocaleDateString("en-us", {
     weekday: "long",
     year: "numeric",
     month: "short",
+    day: "numeric",
+  });
+}
+
+const formatShortCreatedDate = (createAt) => {
+  const date = createAt.split("T")[0]
+  return new Date(date).toLocaleDateString("en-us", {
+    year: "numeric",
+    month: "numeric",
     day: "numeric",
   });
 }
@@ -97,7 +107,7 @@ const addComment = async (imageId, formData, token) => {
 
 const getImagesByCategory = async (category) => {
   try {
-    
+
     const res = await fetch(`${SERVER_URL}/image/category/${category}`)
     const json = await res.json()
     return json
@@ -106,4 +116,4 @@ const getImagesByCategory = async (category) => {
   }
 }
 
-export { allImages, imageSaved, uploadImaged, imageDetail, fetchImageSize, formatCreatedDate, addComment, getImagesByCategory };
+export { allImages, imageSaved, uploadImaged, imageDetail, fetchImageSize, formatCreatedDate, addComment, getImagesByCategory, formatShortCreatedDate };

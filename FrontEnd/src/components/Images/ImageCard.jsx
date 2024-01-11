@@ -13,16 +13,18 @@ const ImageCard = ({ image }) => {
   const { currentUser } = useSelector((state) => state.user);
   const user = currentUser?.user;
   const [postHovered, setPostHovered] = useState(false);
-
+  const publicAt = imageService.formatShortCreatedDate(currentImage.createdAt);
   // download the image
-  const downloadImage = async () => {
+  const downloadImage = async (e) => {
+    e.stopPropagation();
     saveAs(currentImage.url, `tn-img-${currentImage._id}`);
     //update total download
     const data = await imageService.imageSaved(user._id, currentImage._id);
     setCurrentImage(data);
   };
+
   return (
-    <div className="flex flex-col items-center justify-center p-2">
+    <div className="mx-2 mb-10 flex flex-col items-center justify-center">
       <div
         onMouseEnter={() => setPostHovered(true)}
         onMouseLeave={() => setPostHovered(false)}
@@ -35,9 +37,13 @@ const ImageCard = ({ image }) => {
             postHovered ? "scale-[1.2] object-center" : ""
           } w-full rounded-lg transition-all duration-300 ease-in-out hover:scale-150`}
         />
+
         {postHovered && (
-          <div className="absolute top-0 z-20 flex h-full w-full flex-col justify-between bg-black/50 p-1 pb-2 pr-2 pt-2">
-            <div className="flex items-center justify-between text-white">
+          <div
+            className="absolute top-0 z-20 flex h-full w-full flex-col justify-between bg-black/50"
+            onClick={() => navigate(`/images/${currentImage._id}`)}
+          >
+            <div className="ml-2 mr-2 mt-2 flex items-center justify-between text-white">
               <MdDownloadForOffline
                 onClick={downloadImage}
                 size={32}
@@ -51,15 +57,20 @@ const ImageCard = ({ image }) => {
             </div>
             {/* show img source */}
             <div className="flex items-center justify-between gap-2 text-white">
-              <div className="ml-2 flex  items-center justify-center rounded-lg bg-white p-1 opacity-70 transition-all duration-150 ease-in hover:ml-5 hover:scale-125 hover:opacity-100">
-                <div
-                  className="flex items-center justify-center gap-2 px-2 text-black"
-                  onClick={() => navigate(`/images/${currentImage._id}`)}
-                >
-                  <BsFillArrowUpRightCircleFill className="outline-none" />
-                  <p className="text-[10px]">Details</p>
+              <a
+                href={currentImage.url}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:animate-full-width rounded-tr-lg bg-white py-1 opacity-70 hover:rounded-none hover:opacity-100"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center justify-center">
+                  <div className="flex items-center justify-center gap-2 px-2 text-black">
+                    <BsFillArrowUpRightCircleFill className="outline-none" />
+                    <p className="text-sm">url</p>
+                  </div>
                 </div>
-              </div>
+              </a>
               {/* show delete button if user = uploader photo */}
               {user?._id === currentImage.addBy._id && (
                 <div className="flex items-center justify-center rounded-full bg-white p-1 text-red-700 opacity-70 transition-all duration-150 ease-in hover:scale-[1.5] hover:opacity-100">
@@ -71,12 +82,11 @@ const ImageCard = ({ image }) => {
         )}
       </div>
       {/* uploader's name */}
-      <div>
-      </div>
-      <div className="mt-2 w-full">
+      <div></div>
+      <div className="mt-2 flex w-full items-center justify-between">
         <Link
           to={`/user/${currentImage.addBy._id}`}
-          className="flex w-full items-center gap-2 hover:text-emerald-600"
+          className="flex items-center gap-2 hover:text-emerald-600"
         >
           <img
             src={currentImage.addBy.avatar}
@@ -86,6 +96,9 @@ const ImageCard = ({ image }) => {
           />
           <p className="text-sm">{currentImage.addBy.name}</p>
         </Link>
+        {publicAt && (
+          <p className="text-[10px] italic text-slate-500">{publicAt}</p>
+        )}
       </div>
     </div>
   );

@@ -41,7 +41,7 @@ const Comment = () => {
     <div className="w-full">
       <h2 className="mt-3 text-2xl">Comments</h2>
       <div className="container mt-2 flex w-full flex-col gap-2 border-b border-slate-200 pb-2 md:mt-5">
-        {comments.map((comment) => (
+        {comments && comments.map((comment) => (
           <div key={comment._id} className="flex w-full items-center gap-4">
             <Link to={`/user/${comment.addBy?._id}`}>
               <img
