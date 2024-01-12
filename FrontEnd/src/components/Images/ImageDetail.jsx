@@ -96,7 +96,7 @@ const ImageDetail = () => {
           </div>
         </div>
       )}
-      <div className="mt-5" onClick={() => setShowMore(!showMore)}>
+      <div className="my-2 mb-5" onClick={() => setShowMore(!showMore)}>
         <p
           className="linkText flex items-center justify-center gap-4"
           onClick={handleClickShowMore}

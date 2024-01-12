@@ -13,7 +13,7 @@ const breakpointObj = {
 const MasonryLayout = ({ images }) => {
   return (
     <Masonry
-      className="mt-5 flex animate-slide-fwd md:mt-10 dark:text-slate-200"
+      className="my-5 flex animate-slide-fwd md:mt-10 dark:text-slate-200"
       breakpointCols={breakpointObj}
     >
       {images?.map((image) => (

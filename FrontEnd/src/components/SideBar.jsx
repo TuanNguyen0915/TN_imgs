@@ -22,7 +22,7 @@ const SideBar = ({ closeToggle }) => {
   const isNotActiveStyle =
     "text-slate-700/60 flex items-center gap-3 px-5 transition-all duration-150 capitalize ease-in-out hover:text-emerald-600";
 
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState("dark");
   const element = document.documentElement;
   useEffect(() => {
     switch (theme) {
@@ -45,19 +45,19 @@ const SideBar = ({ closeToggle }) => {
           <div className="relative z-50 ml-4 flex items-center rounded-md border border-slate-300 py-2 text-xl">
             <div
               className={`${
-                theme === "dark" ? " rounder-s-md right-0" : "border rounder-e-md left-0"
+                theme === "dark"
+                  ? " rounder-s-md right-0"
+                  : "rounder-e-md left-0 border"
               } z-100 absolute h-full w-1/2 border-slate-300 bg-slate-300 duration-1000 ease-linear`}
             ></div>
             <IoSunny
-              
               // className={`${theme === "" ? "text-sky-600" : ""} mx-2`}
-              className="text-yellow-300 mx-2"
+              className="mx-2 text-yellow-300"
               onClick={() => setTheme("light")}
             />
             <IoMoon
-              
               // className={`${theme === "dark" ? "text-sky-600" : ""} mx-2`}
-              className="text-violet-800 mx-2"
+              className="mx-2 text-violet-800"
               onClick={() => setTheme("dark")}
             />
           </div>
@@ -140,7 +140,7 @@ const SideBar = ({ closeToggle }) => {
           <p>{user.name}</p>
         </Link>
       ) : (
-        <div className="mb-10 flex w-full flex-col items-center justify-center gap-2 px-2">
+        <div className="mb-[10rem] flex w-full flex-col items-center justify-center gap-2 px-2 md:mb-10">
           <p>Please </p>
           <Link
             to="/login"

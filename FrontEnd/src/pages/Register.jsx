@@ -14,6 +14,7 @@ const Login = () => {
           loop
           muted
           autoPlay
+          playsInline
           className="h-full w-full object-cover"
         />
         <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-col items-center justify-center gap-2 bg-blackCover">
