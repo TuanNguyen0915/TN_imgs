@@ -22,14 +22,15 @@ const Login = () => {
             <img src={whiteLogo} alt="logo" className="w-full scale-125" />
           </div>
           <GoogleLogin />
+          <h1 className="text-white text-2xl">OR</h1>
           <LoginForm />
           <h1 className="text-lg font-semibold text-white">
-            Don&#39;t you have account ?{" "}
+            No account ?{" "}
             <Link
               to="/register"
               className="text-emerald-400 hover:uppercase hover:text-white transition-all duration-500 ease-in-out"
             >
-              Register
+              Create one
             </Link>
           </h1>
         </div>

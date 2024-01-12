@@ -15,6 +15,8 @@ const Feed = () => {
     if (categoryId === undefined) {
       const fetchData = async () => {
         const allData = await imageServices.allImages();
+        //shuffle all images every render
+        allData.data = allData.data.sort(()=> 0.5 - Math.random())
         setImages(allData.data);
         dispatch(getAllImages(allData.data))
       };

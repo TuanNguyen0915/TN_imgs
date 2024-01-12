@@ -47,14 +47,14 @@ const ImageDetail = () => {
             />
           </div>
           <div className="container flex flex-col justify-center gap-5 md:gap-8">
-            <p className="text-3xl font-extrabold md:text-4xl">
+            <p className="text-3xl font-extrabold md:text-4xl capitalize">
               {currentImage.title}
             </p>
             <Link
               to={`/category/${currentImage.category}`}
               className="linkText md:text-xl text-base"
             >
-              <p>{currentImage.category}</p>
+              <p className="capitalize">{currentImage.category}</p>
             </Link>
             <a
               href={currentImage.url}

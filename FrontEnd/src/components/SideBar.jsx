@@ -5,7 +5,7 @@ import logoDark from "../assets/black-logo.png";
 import logoLight from "../assets/white-logo.png";
 
 import { categoriesLink } from "../utils/data/data";
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { IoSunny, IoMoon } from "react-icons/io5";
 
@@ -22,35 +22,42 @@ const SideBar = ({ closeToggle }) => {
   const isNotActiveStyle =
     "text-slate-700/60 flex items-center gap-3 px-5 transition-all duration-150 capitalize ease-in-out hover:text-emerald-600";
 
-  const [theme,setTheme] = useState('dark')
-  const element = document.documentElement
-  useEffect(()=>{
+  const [theme, setTheme] = useState('dark');
+  const element = document.documentElement;
+  useEffect(() => {
     switch (theme) {
       case "dark":
-        element.classList.add("dark")
-        break
+        element.classList.add("dark");
+        break;
       case "light":
-        element.classList.remove("dark")
-        break
+        element.classList.remove("dark");
+        break;
       default:
-        break
-      }
-  }, [element.classList, theme])
+        break;
+    }
+  }, [element.classList, theme]);
 
   return (
     <div className="flex h-full min-w-[300px] flex-col justify-between gap-5 overflow-y-auto bg-white dark:bg-slate-500 dark:text-slate-200">
       <div>
         <div className="flex items-center">
           {/* SET THEME */}
-          <div className="ml-4 z-50 flex items-center justify-center gap-2 rounded-md border border-slate-300 p-2 ">
+          <div className="relative z-50 ml-4 flex items-center rounded-md border border-slate-300 py-2 text-xl">
+            <div
+              className={`${
+                theme === "dark" ? " rounder-s-md right-0" : "border rounder-e-md left-0"
+              } z-100 absolute h-full w-1/2 border-slate-300 bg-slate-300 duration-1000 ease-linear`}
+            ></div>
             <IoSunny
-              size={25}
-              className={`${theme === "light" ? "text-sky-600" : ""}`}
+              
+              // className={`${theme === "" ? "text-sky-600" : ""} mx-2`}
+              className="text-yellow-300 mx-2"
               onClick={() => setTheme("light")}
             />
             <IoMoon
-              size={25}
-              className={`${theme === "dark" ? "text-sky-600" : ""}`}
+              
+              // className={`${theme === "dark" ? "text-sky-600" : ""} mx-2`}
+              className="text-violet-800 mx-2"
               onClick={() => setTheme("dark")}
             />
           </div>
@@ -61,7 +68,11 @@ const SideBar = ({ closeToggle }) => {
               className="my-6 flex w-[190px] items-center gap-2 px-5 pt-1"
               onClick={handleCloseSideBar}
             >
-              {theme === 'dark'? <img src={logoLight} alt="logo" className="w-full" />: <img src={logoDark} alt="logo" className="w-full" />}
+              {theme === "dark" ? (
+                <img src={logoLight} alt="logo" className="w-full" />
+              ) : (
+                <img src={logoDark} alt="logo" className="w-full" />
+              )}
             </Link>
           </div>
         </div>
@@ -118,7 +129,7 @@ const SideBar = ({ closeToggle }) => {
       {user ? (
         <Link
           to={`user/${user._id}`}
-          className="mx-3 my-5 mb-3 flex items-center gap-2 rounded-lg p-2 shadow-lg"
+          className="mx-3 mb-10 flex items-center gap-2 rounded-lg border border-slate-300 p-2 shadow-lg dark:border-slate-200 dark:shadow-emerald-700"
           onClick={handleCloseSideBar}
         >
           <img

@@ -40,7 +40,7 @@ const CommentForm = ({ handleSubmit, user }) => {
           type="text"
           name="content"
           value={formData.content}
-          className="w-full rounded-lg border border-slate-300 px-4 py-2 opacity-70 outline-none focus:opacity-100 focus:shadow-lg"
+          className="w-full rounded-lg border border-slate-300 px-4 py-2 opacity-70 outline-none focus:opacity-100 focus:shadow-lg dark:text-slate-600"
           placeholder="Add a comment"
           onChange={handleChange}
         />

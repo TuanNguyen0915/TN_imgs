@@ -32,6 +32,7 @@ const ImageCard = ({ image }) => {
         className={`relative w-auto cursor-zoom-in overflow-hidden rounded-lg transition-all duration-500 ease-in-out hover:shadow-lg`}
       >
         <LazyLoadImage
+          loading="lazy"
           effect="blur"
           src={currentImage.url}
           alt={currentImage.name}
@@ -63,7 +64,7 @@ const ImageCard = ({ image }) => {
                 href={currentImage.url}
                 target="_blank"
                 rel="noreferrer"
-                className="hover:animate-full-width rounded-tr-lg bg-white py-1 opacity-70 hover:rounded-none hover:opacity-100"
+                className="rounded-tr-lg bg-white py-1 opacity-70 hover:animate-full-width hover:rounded-none hover:opacity-100"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex items-center justify-center">

@@ -9,9 +9,6 @@ export const categoriesLink = [
     name: "wallpaper",
   },
   {
-    name: "photo",
-  },
-  {
     name: "game",
   },
   {

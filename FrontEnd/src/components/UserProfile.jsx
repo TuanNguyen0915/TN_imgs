@@ -68,7 +68,7 @@ const UserProfile = () => {
             <img
               src={user.avatar}
               alt="avatar"
-              className="-mt-10 h-20 w-20 rounded-full shadow-2xl shadow-black"
+              className="-mt-10 h-20 w-20 rounded-full shadow-2xl shadow-black dark:shadow-emerald-600"
             />
             <h1 className="mt-5 text-center text-3xl font-bold md:text-5xl">
               {user.name}
