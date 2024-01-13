@@ -21,9 +21,6 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors(corsOption))
 
-app.get('/', (req,res) => {
-  res.send('BackEnd')
-})
 
 // routers
 app.use('/api/user/', authRouter)
