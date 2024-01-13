@@ -14,7 +14,7 @@ import { router as imgRouter } from './routes/image.js'
 
 
 const app = express()
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3000
 const corsOption = {
   origin: true,
   credentials: true
