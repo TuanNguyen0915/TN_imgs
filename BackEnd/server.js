@@ -10,12 +10,21 @@ import './configs/database.js'
 import { router as authRouter } from './routes/auth.js'
 import { router as imgRouter } from './routes/image.js'
 
+
+
+
 const app = express()
 const PORT = process.env.PORT || 8080
 const corsOption = {
   origin: true,
   credentials: true
 }
+
+app.get('/', function (req,res) { 
+  res.send("Backend Server")
+})
+
+
 // basic middleware
 app.use(express.json())
 app.use(cookieParser())
