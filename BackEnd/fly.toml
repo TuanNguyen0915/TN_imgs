@@ -1,18 +1,16 @@
-# fly.toml app configuration file generated for tn-img-backend on 2024-01-12T16:35:26-05:00
+# fly.toml app configuration file generated for tn-imgs-backend on 2024-01-13T11:01:35-05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "tn-img-backend"
+app = "tn-imgs-backend"
 primary_region = "bos"
 
-[env]
-  PORT = "3001"
 
 [build]
 
 [http_service]
-  internal_port = 3001
+  internal_port = 8080
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
